@@ -1,7 +1,8 @@
-
-
 <img src="./docs/indom.svg" alt="InDom - modern JavaScript DOM library" width="147" height="57">
-![quick taste example 1](/docs/readme-quick-taste-1b.jpg)![quick taste example 2](/docs/readme-quick-taste-2b.jpg)
+
+# InDom - 3.7KB modern JavaScript DOM library - powerful, easy and automates cleanup
+
+![quick taste example 1](./docs/readme-quick-taste-1b.jpg)![quick taste example 2](./docs/readme-quick-taste-2b.jpg)
 
 <div style="height:30px;"></div>
 
