@@ -26,82 +26,47 @@
 
 ## Table of Contents
 - **API**
-  - [Shortcuts for convenience](#shortcuts-for-convenience)
-  - [InDom.getOne](#indom-getone-selector-container) - **$1**
-  - [InDom.get](#indom-get-selector-container) - **$a**
-
+	- [Shortcuts for convenience](#shortcuts-for-convenience)
+	- [InDom.getOne](#indom-getone-selector-container) - **$1**
+	- [InDom.get](#indom-get-selector-container) - **$a**
 	- [InDom.getById](#indom-getbyid-id) - **$id**
-
 	- [new InDom](#new-indom-source) - **$n**
+	- [InDom.onReady](#indom-onready-fn)
+	- [.getValue](#getvalue-container)
+	- [InDom.getValues](#indom-getvalues-args) - **$v**
+	- [.setValue](#setvalue-value-container)
+	- [.on + .onClick , onEnter etc.](#on-type-fn-opts)
+	- [.onRemove](#onremove-fn)
+	- [.off](#off-type-fn)
+	- [.setData](#setdata-key-value)
+	- [.getData](#getdata-key)
+	- [.hasData](#hasdata-key)
+	- [.removeData](#removedata-key)
+	- [.getElement / .el](#getelement-el)
+	- [.remove](#remove)
+	- [.is](#is-selector)
+	- [.getParent](#getparent-selector)
+	- [.getSelfOrParent](#getselforparent-selector)
+	- [.getNext](#getnext-selector)
+	- [.getPrev](#getprev-selector)
+	- [.setHtml](#sethtml-content)
+	- [.getHtml](#gethtml)
+	- [.append](#append-children)
+	- [.prepend](#prepend-children)
+	- [.after](#after-siblings)
+	- [.before](#before-siblings)
+	- [.setAttr](#setattr-key-value)
+	- [.getAttr](#getattr-key)
+	- [.hasAttr](#hasattr-key)
+	- [.removeAttr](#removeattr-key)
+	- [.getBox](#getbox)
+	- [.getOuterBox](#getouterbox)
+	- [.getRelativeBox](#getrelativebox)
+	- [.addClass](#addclass-names)
+	- [.hasClass](#hasclass-name)
+	- [.removeClass](#removeclass-names)
+	- [.setStyle](#setstyle-property-map-value)
+	- [.getStyle(...properties?)](#getstyle-properties)
 
-⚬ [InDom.onReady](#indom-onready-fn)
 
-⚬ [.getValue](#getvalue-container)
-
-⚬ [InDom.getValues](#indom-getvalues-args) - <span style="color:#04281c;text-shadow:0px 0px 1px;">$v</span>
-
-⚬ [.setValue](#setvalue-value-container)
-
-⚬ [.on + .onClick , onEnter etc.](#on-type-fn-opts)
-
-⚬ [.onRemove](#onremove-fn)
-
-⚬ [.off](#off-type-fn)
-
-⚬ [.setData](#setdata-key-value)
-
-⚬ [.getData](#getdata-key)
-
-⚬ [.hasData](#hasdata-key)
-
-⚬ [.removeData](#removedata-key)
-
-⚬ [.getElement / .el](#getelement-el)
-
-⚬ [.remove](#remove)
-
-⚬ [.is](#is-selector)
-
-⚬ [.getParent](#getparent-selector)
-
-⚬ [.getSelfOrParent](#getselforparent-selector)
-
-⚬ [.getNext](#getnext-selector)
-
-⚬ [.getPrev](#getprev-selector)
-
-⚬ [.setHtml](#sethtml-content)
-
-⚬ [.getHtml](#gethtml)
-
-⚬ [.append](#append-children)
-
-⚬ [.prepend](#prepend-children)
-
-⚬ [.after](#after-siblings)
-
-⚬ [.before](#before-siblings)
-
-⚬ [.setAttr](#setattr-key-value)
-
-⚬ [.getAttr](#getattr-key)
-
-⚬ [.hasAttr](#hasattr-key)
-
-⚬ [.removeAttr](#removeattr-key)
-
-⚬ [.getBox](#getbox)
-
-⚬ [.getOuterBox](#getouterbox)
-
-⚬ [.getRelativeBox](#getrelativebox)
-
-⚬ [.addClass](#addclass-names)
-
-⚬ [.hasClass](#hasclass-name)
-
-⚬ [.removeClass](#removeclass-names)
-
-⚬ [.setStyle](#setstyle-property-map-value)
-
-⚬ [.getStyle(...properties?)](#getstyle-properties)
+	
