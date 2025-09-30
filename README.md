@@ -69,4 +69,47 @@
 	- [.getStyle(...properties?)](#getstyle-properties)
 
 
+##API
+
+### Shortcuts for convenience
+The convenience shortcuts ($1, $a, $id, $n, $v) are optional and can be renamed, scoped differently, or removed entirely based on your preferences.
+[↑TOC](#table-of-contents)
+
+### `InDom.getOne(selector, container?)`
+**Shortcut:** <span style="color:#04281c;text-shadow:0px 0px 1px;">$1</span>
+
+Queries the DOM using the CSS selector and returns an `InDom` object that contains the matching DOM element.
+Returns `null` if no matching element is found.
+
+**Parameters:**
+- `selector` {string}: CSS selector string
+- `container` {ParentNode|InDom} (optional): The container element or InDom object to search within. Defaults to `document`.
+
+**Returns:** `InDom | null`
+
+**Examples:**
+```js
+	$1('.example>div').setStyle('color', 'blue');
+	/*
+		If .example>div doesn't match any element, $1('.example>div') will return null.
+		Attempting to call a method on null will result in a TypeError.
+		If you want to avoid this error when the element is not found,
+		use the optional chaining operator (?.) e.g.:
+	*/
+	$1('.example>div')?.setStyle('color', 'blue');
+
+	$1('.example>div').onClick(n => {
+		//n here is the InDom object
+		n.addClass('clicked').setStyle({ 'color': 'red', 'font-size': '120%' });
+	});
+
+	// Set style to the first 'span', of the first '.example>div'
+	$1('span', $1('.example>div')).setStyle('color', 'green');
+
+	//or:
+	const div = $1('.example>div');
+	$1('span', div).setStyle('color', 'green');
+```
+
+
 	
