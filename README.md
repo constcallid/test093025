@@ -42,9 +42,9 @@
 
 [on (+ onClick , onEnter etc.)](#on-type-fn-opts) | [onRemove](#onremove-fn) | [off](#off-type-fn)
 
-[getElement](#getelement-el) | [remove](#remove) | [is](#is-selector) | [getParent](#getparent-selector) | [getNext](#getnext-selector) | [getPrev](#getprev-selector) | [append](#append-children) | [prepend](#prepend-children) | [after](#after-siblings) | [before](#before-siblings)
+[getElement / el](#getelement-el) | [remove](#remove) | [is](#is-selector) | [getParent](#getparent-selector) | [getSelfOrParent](#getparent-selector) | [getNext](#getnext-selector) | [getPrev](#getprev-selector) | [append](#append-children) | [prepend](#prepend-children) | [after](#after-siblings) | [before](#before-siblings)
 
-[setData](#setdata-key-value) | [getData](#getdata-key) | [hasData](#hasdata-key) | [removeData](#removedata-key) | [setAttr](#setattr-key-value) | [getAttr](#getattr-key) | [hasAttr](#hasattr-key) | [removeAttr](#removeattr-key)
+[setData](#setdata-key-value) | [getData](#getdata-key) | [hasData](#hasdata-key) | [removeData](#removedata-key) | [setAttr](#setattr-key-value) | [getAttr](#getattr-key) | [hasAttr](#hasattr-key) | [removeAttr](#removeattr-key) | [setHtml](#setdata-key-value) | [getHtml](#getdata-key)
 
 [getBox](#getbox) | [getOuterBox](#getouterbox) | [getRelativeBox](#getrelativebox) | [addClass](#addclass-names) | [hasClass](#hasclass-name) | [removeClass](#removeclass-names)  | [setStyle](#setstyle-property-map-value) | [getStyle](#getstyle-properties)
 <hr>
@@ -565,4 +565,466 @@ divs.off();
 ```
 
 [↑TOC](#table-of-contents)
+
+### `.getElement()` / `.el()`
+**Available on:** `InDom`
+
+Read-only reference to the underlying DOM element of the InDom object.
+
+**Returns:**  
+{Element|Document} - Element or the `document`
+
+**Throws:**  
+- `Error`: If the underlying element has been removed  
+
+**Examples:**
+```js
+console.log($1('.example>div').el().scrollTop);
+```
+
+[↑TOC](#table-of-contents)
+
+### `.remove()`
+**Available on:** `InDom`, `InDomArray`
+
+Cleans the internal state of the InDom object(s) and removes the underlying DOM element(s) from the document. 
+This method is also triggered automatically, when the element is removed from the DOM by any other means.
+
+**Throws:**  
+- `Error`: If the underlying element (or an element in case of InDomArray) has already been removed  
+
+**Examples:**
+```js
+// remove the first .example>div
+$1(".example>div").remove(); 
+
+// remove all .example>div
+$a(".example>div").remove();
+```
+
+[↑TOC](#table-of-contents)
+
+### `.is(selector)`
+**Available on:** `InDom`
+
+Checks if the underlying element matches a CSS selector
+
+**Parameters:**  
+- `selector` {string} - CSS selector to match against.
+
+**Returns:**  
+{boolean} -  True if matches , false if doesn't
+
+**Throws:**  
+- `Error`: If the underlying element has been removed  
+
+**Examples:**
+```js
+const example = $1('.example>div');
+console.log(example.is('div'));
+//true 
+console.log(example.is('.test'));
+//false
+```
+
+[↑TOC](#table-of-contents)
+
+### `.getParent(selector?)`
+**Available on:** `InDom`
+
+Returns the InDom object for the closest ancestor (or direct parent if no selector) that matches the selector.  
+Returns `null` if nothing is found.
+
+**Parameters:**  
+- `selector` {string} (optional) - CSS selector to test against ancestors.
+
+**Returns:** `InDom | null`
+
+**Throws:**  
+- `Error`: If the underlying element has been removed  
+
+**Examples:**
+```js
+const span = $1('.example>div>span');
+
+console.log(span.getParent().getHtml());
+// <span>this is a first test</span>
+
+console.log(span.getParent('.example').getHtml());
+// <div> <span>this is a first test</span></div>...
+```
+
+[↑TOC](#table-of-contents)
+
+### `.getSelfOrParent(selector)`
+**Available on:** `InDom`
+
+Returns `this` if its underlying element matches the selector, otherwise the InDom objet for its closest ancestor element that matches.  
+Returns `null` if nothing is found.
+
+**Parameters:**  
+- `key` {selector} - CSS selector to test against `this` and ancestors.
+
+**Returns:** `InDom | null`
+
+**Throws:**  
+- `Error`: If the underlying element has been removed  
+
+**Examples:**
+```js
+// delegate clicks on all links (present or future)
+$n(document).onClick((_, e) => {
+	// _ instead of n because we only need the event object here (for IDEs)
+	const link = $n(e.target).getSelfOrParent("a");
+	if (link) {
+		console.log(`link:${a.getAttr('href')} clicked`);
+	}
+});
+
+// test link (works even if added later)
+$1('body').append(`<a href="https://github.com/constcallid/indom" target="_blank">
+	InDom - modern JavaScript DOM library</a>`);
+```
+
+[↑TOC](#table-of-contents)
+
+### `.getNext(selector)`
+**Available on:** `InDom`
+
+Returns the InDom object for next sibling element (or the next sibling that matches the selector).
+Returns `null` if nothing is found.
+
+**Parameters:**  
+- `selector` {string} (optional) - CSS selector to test against siblings.
+
+**Returns:** `InDom | null`
+
+**Throws:**  
+- `Error`: If the underlying element has been removed  
+
+**Examples:**
+```html
+<div class="sibling-example">
+	<div class="a">.a test</div>
+	<div>test</div>
+	<div class="c">.c test</div>
+</div>
+```
+```js
+const span = $1('.sibling-example>.a');
+
+console.log(span.getNext().getHtml());
+// test
+
+console.log(span.getNext('.c').getHtml());
+// .c test
+```
+
+[↑TOC](#table-of-contents)
+
+### `.getPrev(selector)`
+**Available on:** `InDom`
+
+Returns the InDom object for previous sibling element (or the previous sibling that matches the selector).
+Returns `null` if nothing is found.
+
+**Parameters:**  
+- `selector` {string} (optional) - CSS selector to test against siblings.
+
+**Returns:** `InDom | null`
+
+**Throws:**  
+- `Error`: If the underlying element has been removed  
+
+**Examples:**
+```js
+const span = $1('.sibling-example>.c');
+
+console.log(span.getPrev().getHtml());
+// test
+
+console.log(span.getPrev('.a').getHtml());
+// .a test
+```
+
+[↑TOC](#table-of-contents)
+
+### `.append(...children)`
+**Available on:** `InDom`, `InDomArray`
+
+Appends one or more HTML strings, DOM elements or InDom objects to the end of the underlying element(s).
+
+**Parameters:**  
+- `...children` {string|Element|InDom} - Content to append (variadic; single array is flattened)
+
+**Returns:**  
+{InDom|InDomArray} - `this` for chaining
+
+**Throws:**  
+- `Error`: If the underlying element(s) has been removed 
+
+**Examples:**
+```html
+<ul class="example-1"><li>li 1</li><li>li 2</li></ul>
+<div class="example-2"><span>span 1</span><div>div 1</div><div>div 2</div></div>
+```
+```js
+//isolated steps
+const ul = $1('ul.example-1');
+
+// raw HTML string
+ul.append('<div>test</div>');
+console.log(ul.getHtml()); 
+// <li>li 1</li><li>li 2</li><div>test</div>
+
+// native DOM element
+const img = new Image();
+img.src = 'example-star.png';
+img.width = img.height = 50;
+ul.append(img);
+console.log(ul.getHtml()); 
+// <li>li 1</li><li>li 2</li><img …>
+
+// InDom object
+ul.append($n(img)); // same img, in InDom object
+console.log(ul.getHtml()); // identical markup
+// <li>li 1</li><li>li 2</li><img …>
+
+// InDomArray (moved from .example-2)
+const donor = $1('.example-2');
+ul.append($a('>div', donor)); // moves both divs
+console.log(ul.getHtml());
+// <li>li 1</li><li>li 2</li><div>div 1</div><div>div 2</div>
+console.log(donor.getHtml()); 
+// <span>span 1</span> (divs gone)
+
+// bulk append to every <li> of ul
+$a('>li', ul).append('<span>test</span>');
+console.log(ul.getHtml()); 
+// <li>li 1<span>test</span></li><li>li 2<span>test</span></li>
+```
+
+[↑TOC](#table-of-contents)
+
+### `.prepend(...children)`
+**Available on:** `InDom`, `InDomArray`
+
+Prepends one or more HTML strings, DOM elements or InDom objects to the end of the underlying element(s).
+
+**Parameters:**  
+- `...children` {string|Element|InDom} - Content to append (variadic; single array is flattened)
+
+**Returns:**  
+{InDom|InDomArray} - `this` for chaining
+
+**Throws:**  
+- `Error`: If the underlying element(s) has been removed 
+
+**Examples:**
+```js
+// prepend examples (mirror of append examples)
+const ul = $1('ul.example-1');
+
+ul.prepend('<li>first</li>'); // string
+ul.prepend(img); // Dom Element
+ul.prepend($n(img)); // InDom object (same img) 
+ul.prepend($a('>div', donor)); // InDomArray
+$a('>li', ul).prepend('<span>test</span>'); // bulk prepend to every <li> of ul
+```
+
+[↑TOC](#table-of-contents)
+
+### `.after(...siblings)`
+**Available on:** `InDom`, `InDomArray`
+
+Inserts one or more HTML strings, DOM elements or InDom objects after the underlying element(s).
+When multiple items are provided they are inserted in reverse order so the first item appears first in the DOM.
+
+**Parameters:**  
+- `...siblings` {string|Element|InDom} - Content to append (variadic; single array is flattened)
+
+**Returns:**  
+{InDom|InDomArray} - `this` for chaining
+
+**Throws:**  
+- `Error`: If the underlying element(s) has been removed 
+
+**Examples:**
+```html
+<ul class="example-1"><li>li 1</li><li>li 2</li></ul>
+<div class="example-2"><span>span 1</span><div>div 1</div><div>div 2</div></div>
+```
+```js
+//isolated steps
+const ul = $1('ul.example-1');
+const firtsLi = $1(">li",ul);
+
+// raw HTML string
+//firtsLi.after('<div>test</div>');
+console.log(ul.getHtml());
+// <li>li 1</li><div>test</div><li>li 2</li>
+
+// native DOM element
+const img = new Image();
+img.src = 'example-star.png';
+img.width = img.height = 50;
+//firtsLi.after(img);
+console.log(ul.getHtml());
+//<li>li 1</li><img ...><li>li 2</li>
+
+// InDom object
+firtsLi.after($n(img)); // same img, in InDom object
+console.log(ul.getHtml()); // identical markup
+//<li>li 1</li><img ...><li>li 2</li>
+
+// InDomArray (moved from .example-2)
+const donor = $1('.example-2');
+firtsLi.after($a('>div', donor)); // moves both divs
+console.log(ul.getHtml());
+//<li>li 1</li><div>div 1</div><div>div 2</div><li>li 2</li>
+console.log(donor.getHtml());
+// <span>span 1</span> (divs gone)
+
+// bulk after to every <li> of ul
+$a('>li', ul).after('<span>test</span>');
+console.log(ul.getHtml());
+//<li>li 1</li><span>test</span><li>li 2</li><span>test</span>
+```
+
+[↑TOC](#table-of-contents)
+
+### `.before(...siblings)`
+**Available on:** `InDom`, `InDomArray`
+
+Inserts one or more HTML strings, DOM elements or InDom objects before the underlying element(s).
+
+**Parameters:**  
+- `...siblings` {string|Element|InDom} - Content to append (variadic; single array is flattened)
+
+**Returns:**  
+{InDom|InDomArray} - `this` for chaining
+
+**Throws:**  
+- `Error`: If the underlying element(s) has been removed 
+
+**Examples:**
+```js
+// before examples (mirror of after examples)
+const ul = $1('ul.example-1');
+const firtsLi = $1(">li", ul);
+
+firtsLi.before('<div>test</div>'); // raw HTML string
+firtsLi.before(img); // native DOM element
+firtsLi.before($n(img)); // same img, in InDom object
+firtsLi.before($a('>div', donor)); // InDomArray (moves both divs)
+$a('>li', ul).before('<span>test</span>'); // bulk before to every <li> of ul
+```
+
+[↑TOC](#table-of-contents)
+
+
+[↑TOC](#table-of-contents)
+
+
+[↑TOC](#table-of-contents)
+
+
+[↑TOC](#table-of-contents)
+
+
+[↑TOC](#table-of-contents)
+
+
+[↑TOC](#table-of-contents)
+
+### `.setHtml(content)`
+**Available on:** `InDom`, `InDomArray`
+
+Sets the innerHTML of the underlying element(s).
+
+**Parameters:**  
+- `content` {string} - Content to insert (coerced to string)
+
+**Returns:**  
+{InDom|InDomArray} - `this` for chaining
+
+**Throws:**  
+- `Error`: If the underlying element(s) has been removed 
+
+**Examples:**
+```js
+const div1 = $1('.example>div');
+
+//set onClick on the every span child of div1
+$a('>span', div1).onClick(n => console.log('clicked', n));
+
+
+//replace innerHTML → old spans gone, listener gone
+div1.setHtml('<span>another test</span>');
+
+// re-register on the new span(s):
+$a('>span', div1).onClick(n => console.log('clicked', n));
+
+// or:
+div1.onClick((_, e) => {
+	const span = $(e.target).getSelfOrParent('.example>div>span');
+	if (span) {
+		console.log('clicked', span);
+	}
+});
+```
+
+[↑TOC](#table-of-contents)
+
+### `.getHtml()`
+**Available on:** `InDom`
+
+Returns the innerHTML of the underlying element.
+
+**Returns:**  
+{string} - Content
+
+**Throws:**  
+- `Error`: If the underlying element has been removed 
+
+**Examples:**
+```js
+const html = $1(".example>div").getHtml(); 
+console.log(html);
+//<span>this is a test</span>
+```
+
+[↑TOC](#table-of-contents)
+
+
+[↑TOC](#table-of-contents)
+
+
+[↑TOC](#table-of-contents)
+
+
+[↑TOC](#table-of-contents)
+
+
+[↑TOC](#table-of-contents)
+
+
+[↑TOC](#table-of-contents)
+
+
+[↑TOC](#table-of-contents)
+
+
+[↑TOC](#table-of-contents)
+
+
+[↑TOC](#table-of-contents)
+
+
+[↑TOC](#table-of-contents)
+
+
+[↑TOC](#table-of-contents)
+
+
 
