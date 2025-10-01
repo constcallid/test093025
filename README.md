@@ -27,6 +27,7 @@
 ## Table of Contents
 
 <hr>
+
 ### API Reference
 
 [Shortcuts](#shortcuts-for-convenience) | [getOne → **$1**](#indomgetoneselector-container) | [get → **$a**](#indomgetselector-container) | [getById → **$id**](#indomgetbyidid) | [new InDom → **$n**](#new-indomsource) | [onReady](#indom-onready-fn)
