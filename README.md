@@ -1,4 +1,4 @@
-# <img src="./docs/img/indom.svg" alt="InDom" width="147" height="57"> - 3.7KB modern JavaScript DOM library - powerful, easy and automates cleanup
+# <img src="./docs/img/indom.svg" alt="InDom" width="147" height="57"> - 3.7KB modern JavaScript DOM library - powerful, easy and automates cleanup [![License MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/constcallid/indom/LICENSE)
 
 ![quick taste example 1](./docs/img/readme-quick-taste-1b.jpg)![quick taste example 2](./docs/img/readme-quick-taste-2b.jpg)
 
@@ -378,14 +378,49 @@ Returns the current value of the element, normalized for its type.
 	<div>
 		<input type="file" name="documents" multiple accept=".pdf,.doc,.docx">
 	</div>
+</div>
 ```
 </details>
 
+```js
+const container = $1('.input-examples');
 
+// Iterate through each direct child <div> within the container.
+$a('>div', container).each(div => {
+    // Find the first child element within the current div.
+    // Based on the HTML structure, this is the actual field input/textarea/select/etc.
+    const field = $1('>*', div);
 
-```html
-<details>
-<summary>Test Details</summary>
-<p>This is a test</p>
-</details>
+    // Create a button 
+    const btn = $n("<span class='btn'>log value</span>");
+
+    // Append the button to the current div so it sits next to the field.
+    div.append(btn);
+
+    // Attach a click event listener to the button.
+    btn.onClick(() => {
+        // When the button is clicked, log the field's name and its current value.
+        console.log(`name: ${field.getAttr("name")} value:`);
+
+        // Call the getValue() method on the field and log the result.
+        // The output will vary based on the type of field and its current state.
+        console.log(field.getValue());
+        
+        /*
+        Expected outputs based on initial HTML state:
+        - input "username" -> string 
+        - textarea "message" -> string
+        - select "color" -> string (selected color)
+        - select "size" multiple -> array of strings (selected sizes), empty if none selected
+        - radio "payment" -> string (selected payment), null if none selected
+        - checkbox "features" -> array of strings (selected features), empty if none selected
+        - file "documents" -> FileList object, empty if none selected with .length 0
+        */			
+    });
+});
 ```
+
+[↑TOC](#table-of-contents)
+
+
+
