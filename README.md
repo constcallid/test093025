@@ -376,3 +376,10 @@ Returns the current value of the element, normalized for its type.
 </div>
 ```
 
+
+```html
+<details>
+<summary>Test Details</summary>
+<p>This is a test</p>
+</details>
+```
