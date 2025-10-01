@@ -28,14 +28,17 @@
 <table width="100%">
 	<tr>
 		<td width="33%">
+		
 - [Shortcuts for convenience](#shortcuts-for-convenience)
 - [InDom.getOne](#indomgetoneselector-container) - **$1**
 		</td>
 		<td width="34%">
+		
 - [Shortcuts for convenience](#shortcuts-for-convenience)
 - [InDom.getOne](#indomgetoneselector-container) - **$1**
 		</td>
 		<td width="33%">
+		
 - [Shortcuts for convenience](#shortcuts-for-convenience)
 - [InDom.getOne](#indomgetoneselector-container) - **$1**
 		</td>				
