@@ -23,6 +23,8 @@
 - **TypeScript Ready:** Includes built-in types (ES2022 compatible) available in `/src`.
 
 
+## API
+
 
 ## Table of Contents
 
