@@ -29,18 +29,18 @@
 	<tr>
 		<td width="33%">
 		
-- [Shortcuts for convenience](#shortcuts-for-convenience)
-- [InDom.getOne](#indomgetoneselector-container) - **$1**
+&#x2218;[Shortcuts for convenience](#shortcuts-for-convenience)
+&#x2218;[InDom.getOne](#indomgetoneselector-container) - **$1**
 		</td>
 		<td width="34%">
 		
-- [Shortcuts for convenience](#shortcuts-for-convenience)
-- [InDom.getOne](#indomgetoneselector-container) - **$1**
+&#x2218;[Shortcuts for convenience](#shortcuts-for-convenience)
+&#x2218;[InDom.getOne](#indomgetoneselector-container) - **$1**
 		</td>
 		<td width="33%">
 		
-- [Shortcuts for convenience](#shortcuts-for-convenience)
-- [InDom.getOne](#indomgetoneselector-container) - **$1**
+&#x2218;[Shortcuts for convenience](#shortcuts-for-convenience)
+&#x2218;[InDom.getOne](#indomgetoneselector-container) - **$1**
 		</td>				
 	</tr>
 </table>
