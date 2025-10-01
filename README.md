@@ -69,8 +69,8 @@
 	- [.setStyle](#setstyle-property-map-value)
 	- [.getStyle(...properties?)](#getstyle-properties)
 	
-	
-	
+<br>
+
 ##API
 
 ### Shortcuts for convenience
