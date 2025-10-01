@@ -542,7 +542,10 @@ const divs = $a('.example>div');
 
 divs.onClick(n => {
 	console.log(n);
-	// this function is visible in DevTools: #e (#events) / click / Set entry / [[TargetFunction]]
+	/*
+		this function is visible in DevTools: 
+		#e (#events) / click / Set entry / [[TargetFunction]]
+	*/
 });
 
 // a simple logger example 
