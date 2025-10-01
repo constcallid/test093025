@@ -32,7 +32,9 @@
 		<td width="33%">
 		
 &#x2218;[Shortcuts for convenience](#shortcuts-for-convenience)
+
 &#x2218;[InDom.getOne](#indomgetoneselector-container) - **$1**
+
 &#x2218;[InDom.get](#indomgetselector-container) - **$a**
 &#x2218;[InDom.getById](#indomgetbyidid) - **$id**
 &#x2218;[new InDom](#new-indomsource) - **$n**
