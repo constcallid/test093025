@@ -22,12 +22,12 @@
 
 - **TypeScript Ready:** Includes built-in types (ES2022 compatible) available in `/src`.
 
+<br>
 
 ## Table of Contents
 
-- **API**
+**API**
 <hr>
-
 [Shortcuts](#shortcuts-for-convenience) | [getOne → **$1**](#indomgetoneselector-container) | [get → **$a**](#indomgetselector-container) | [getById → **$id**](#indomgetbyidid) | [new InDom → **$n**](#new-indomsource) | [onReady](#indom-onready-fn)
 
 [getValue](#getvalue-container) | [getValues → **$v**](#indom-getvalues-args) | [setValue](#setvalue-value-container)
