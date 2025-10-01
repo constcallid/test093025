@@ -70,6 +70,7 @@
 	- [.getStyle(...properties?)](#getstyle-properties)
 
 
+
 ##API
 
 ### Shortcuts for convenience
