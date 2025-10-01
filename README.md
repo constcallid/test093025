@@ -27,7 +27,7 @@
 ## Table of Contents
 - **API**
 	- [Shortcuts for convenience](#shortcuts-for-convenience)
-	- [InDom.getOne](#indom-getone-selector-container) - **$1**
+	- [InDom.getOne](#indomgetoneselector-container) - **$1**
 	- [InDom.get](#indom-get-selector-container) - **$a**
 	- [InDom.getById](#indom-getbyid-id) - **$id**
 	- [new InDom](#new-indom-source) - **$n**
