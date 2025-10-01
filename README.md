@@ -477,3 +477,89 @@ searchBtn.onClick(() => {
 $n(document).onClick((_, e) => $n(e.target).addClass('clicked'));
 ```
 
+[↑TOC](#table-of-contents)
+
+### `.onRemove(fn)`
+**Available on:** `InDom`, `InDomArray`
+
+Registers a callback function that runs after the object's internal state (listeners, data) has been cleaned up, and just before its element is removed from the DOM.
+
+**Parameters:**
+- `fn` {Function} - The callback function
+
+**Returns:**
+`{Function|Function[]}` - The internal handler(s) – pass to .off('onRemove', …) to unregister
+
+**Throws:**
+- `TypeError`: If `fn` is not a function
+- `Error`: If the underlying element(s) has been removed  
+
+**Examples:**
+```js
+const example = $1('.example');
+
+// callback fires no matter how the element is removed
+example.onRemove(() => {
+  console.log('removed:', example);
+  alert('press OK → element disappears');
+});
+
+// Through InDom remove method on the object
+example.remove();
+
+// Through InDom setHtml on body 
+$1('body').setHtml('empty');
+
+// Through native DOM removal
+document.querySelector('.example').remove();
+
+// Through native innerHTML on its parent 
+document.querySelector('.example').parentElement.innerHTML = 'empty';
+```
+
+[↑TOC](#table-of-contents)
+
+### `.off(type?, fn?)`
+**Available on:** `InDom`, `InDomArray`
+
+Removes event listener(s) registered with `.on()` or its shorthand methods.
+
+**Parameters:**  
+- `type` {string} (optional) - Event type. If omitted, **all** listeners are removed. 
+- `fn` {Function | Function[]} (optional) - Handler(s) returned by `.on()`. If omitted, **all** listeners of `type` are removed. 
+
+**Returns:**  
+{InDom|InDomArray} - `this` for chaining
+
+**Throws:**  
+- `TypeError`: If `type` is provided but is not a non-empty string.  
+- `RangeError` for `InDomArray`: If `fn` array length does not match collection length.
+- `Error`: If the underlying element has been removed  
+
+**Examples:**
+```js 
+const divs = $a('.example>div');
+
+divs.onClick(n => {
+	console.log(n);
+	// this function is visible in DevTools: #e (#events) / click / Set entry / [[TargetFunction]]
+});
+
+// a simple logger example 
+divs.onEnter(n => console.log(`onEnter in:${n.getHtml()}`));
+
+const addOnFns = divs.onEnter(n => n.addClass('on'));
+const removeOnFns = divs.onLeave(n => n.removeClass('on'));
+
+// remove addOnFns and removeOnFns but keep the first onEnter logger
+divs.off('mouseenter',addOnFns).off('mouseleave',removeOnFns);
+
+// remove every mouseenter handler (including the logger)
+divs.off('mouseenter');
+
+// remove every handler of every type (including onClick)
+divs.off();
+```
+
+[↑TOC](#table-of-contents)
+
