@@ -28,6 +28,12 @@
 
 <hr>
 
+### Getting Started
+
+[Shortcuts](#shortcuts-for-convenience) | [getOne → **$1**](#indomgetoneselector-container) | [get → **$a**](#indomgetselector-container) | [getById → **$id**](#indomgetbyidid) | [new InDom → **$n**](#new-indomsource) | [onReady](#indom-onready-fn)
+
+<hr>
+
 ### API Reference
 
 [Shortcuts](#shortcuts-for-convenience) | [getOne → **$1**](#indomgetoneselector-container) | [get → **$a**](#indomgetselector-container) | [getById → **$id**](#indomgetbyidid) | [new InDom → **$n**](#new-indomsource) | [onReady](#indom-onready-fn)
@@ -43,6 +49,11 @@
 [getBox](#getbox) | [getOuterBox](#getouterbox) | [getRelativeBox](#getrelativebox) | [addClass](#addclass-names) | [hasClass](#hasclass-name) | [removeClass](#removeclass-names)  | [setStyle](#setstyle-property-map-value) | [getStyle](#getstyle-properties)
 <hr>
 
+### Additional Topics
+
+[Shortcuts](#shortcuts-for-convenience) | [getOne → **$1**](#indomgetoneselector-container) | [get → **$a**](#indomgetselector-container) | [getById → **$id**](#indomgetbyidid) | [new InDom → **$n**](#new-indomsource) | [onReady](#indom-onready-fn)
+
+<hr>
 	
 <br>
 
