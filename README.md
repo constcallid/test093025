@@ -24,19 +24,6 @@
 
 
 ## Table of Contents
-<table width="270px"><tr><td width="270px">
-[Shortcuts for convenience](#shortcuts-for-convenience)
-[InDom.getOne](#indomgetoneselector-container) - **$1**
-</td></tr></table>
-<table width="270px"><tr><td width="270px">
-[Shortcuts for convenience](#shortcuts-for-convenience)
-[InDom.getOne](#indomgetoneselector-container) - **$1**
-</td></tr></table>
-<table width="270px"><tr><td width="270px">
-[Shortcuts for convenience](#shortcuts-for-convenience)
-[InDom.getOne](#indomgetoneselector-container) - **$1**
-</td></tr></table>
-
 
 - **API**
 	- [Shortcuts for convenience](#shortcuts-for-convenience)
