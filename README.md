@@ -8,9 +8,9 @@
 
 - **Modern JavaScript:** Built with ES2022, empowers clean and maintainable code.
 
-- **Powerful Cleanup:** State (event listeners, data, etc.) **automatically** removed when elements are destroyed 
+- **Powerful Cleanup:** State (event listeners, data, etc.) **automatically** removed when elements are destroyed. Leak-proof by design, no need for manual cleanup to avoid memory leaks. 
 
-- **Stack Agnostic:** Leak-proof by design, no need for manual cleanup to avoid memory leaks. Set events with InDom, remove elements with any library (an older JS DOM lib, a modern large JS framework, etc.) – cleanup still happens automatically
+- **Stack Agnostic:** Set events with InDom, remove elements with any library (an older JS DOM library, a modern large JS framework, etc.) – cleanup still happens automatically. This allows gradual adoption of InDom at any pace.
 
 - **Fast & Dependency-Free:** Optimized for performance with zero external dependencies.
 
@@ -178,14 +178,12 @@ const example2 = $id("test");
 ### `new InDom(source)`
 Shortcut: **$n**
 
-Creates a new `InDom` object wrapping a DOM Element or parsing an HTML string to create a DOM Element.
-Returns an existing `InDom` object if one already exists for the given source element.
-Throws a `TypeError` if the source is not a valid DOM Element or HTML string.
+Creates a new `InDom` object from a given underlying DOM element or an HTML string representing a DOM element.
 
 **Parameters:**
 - `source` {Document|Element|string}: DOM Element or HTML string of a DOM element
 
-**Returns:** `InDom`
+**Returns:** `InDom` - New `InDom` object or an existing one (if one already exists for the given source element).
 
 **Throws:**
 - `TypeError`: If the source is not a valid DOM Element, the document or HTML string of one DOM Element
@@ -288,5 +286,26 @@ if (a === b) {
 
 [↑TOC](#table-of-contents)
 
+### `InDom.onReady(fn)`
 
+Registers a function to run when DOM is ready (or immediately if already ready).
+
+**Parameters:**
+- `fn` {function}
+
+**Throws:**
+- `TypeError`: If `fn` handler is not a function 
+
+**Examples:**
+```js
+// If the JavaScript file (containing InDom) is loaded and executed before the HTML DOM content 
+// is fully parsed, attempting to select elements immediately might fail because they don't exist yet.
+// Additionally, adding event listeners to elements that haven't been parsed yet will also fail.
+// Use the InDom.onReady() function to ensure your code runs only after the DOM is fully loaded and ready.
+// Example:
+InDom.onReady(() => {
+    // Safe to use InDom for quering DOM elements and attach event listeners here
+    $1(".example").addClass("on");
+});
+```
 	
