@@ -31,22 +31,22 @@
 	<tr>
 		<td width="33%">	
 			
-&#x2218;[Shortcuts for convenience](#shortcuts-for-convenience)<div></div>
-&#x2218;[InDom.getOne](#indomgetoneselector-container) - **$1**<div></div>
-&#x2218;[InDom.get](#indomgetselector-container) - **$a**
-&#x2218;[InDom.getById](#indomgetbyidid) - **$id**
-&#x2218;[new InDom](#new-indomsource) - **$n**
-&#x2218;[InDom.onReady](#indom-onready-fn)
-&#x2218;[.getValue](#getvalue-container)
-&#x2218;[InDom.getValues](#indom-getvalues-args) - **$v**
-&#x2218;[.setValue](#setvalue-value-container)
-&#x2218;[.on + .onClick , onEnter etc.](#on-type-fn-opts)
-&#x2218;[.onRemove](#onremove-fn)
-&#x2218;[.off](#off-type-fn)
-&#x2218;[.setData](#setdata-key-value)
-&#x2218;[.getData](#getdata-key)
-&#x2218;[.hasData](#hasdata-key)
-&#x2218;[.removeData](#removedata-key)
+&#x2218;[Shortcuts for convenience](#shortcuts-for-convenience)<br>
+&#x2218;[InDom.getOne](#indomgetoneselector-container) - **$1**<br>
+&#x2218;[InDom.get](#indomgetselector-container) - **$a**<br>
+&#x2218;[InDom.getById](#indomgetbyidid) - **$id**<br>
+&#x2218;[new InDom](#new-indomsource) - **$n**<br>
+&#x2218;[InDom.onReady](#indom-onready-fn)<br>
+&#x2218;[.getValue](#getvalue-container)<br>
+&#x2218;[InDom.getValues](#indom-getvalues-args) - **$v**<br>
+&#x2218;[.setValue](#setvalue-value-container)<br>
+&#x2218;[.on + .onClick , onEnter etc.](#on-type-fn-opts)<br>
+&#x2218;[.onRemove](#onremove-fn)<br>
+&#x2218;[.off](#off-type-fn)<br>
+&#x2218;[.setData](#setdata-key-value)<br>
+&#x2218;[.getData](#getdata-key)<br>
+&#x2218;[.hasData](#hasdata-key)<br>
+&#x2218;[.removeData](#removedata-key)<br>
 		</td>
 		<td width="34%">
 		
