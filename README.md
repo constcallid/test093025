@@ -44,8 +44,10 @@
 [setAttr](#setattr-key-value) | [getAttr](#getattr-key) | [hasAttr](#hasattr-key) | [removeAttr](#removeattr-key) | [getBox](#getbox) | [getOuterBox](#getouterbox) | [getRelativeBox](#getrelativebox) | [addClass](#addclass-names) | [hasClass](#hasclass-name) | [removeClass](#removeclass-names) | [setStyle](#setstyle-property-map-value) | [getStyle](#getstyle-properties)
 
 ## Table of Contents
+
 - ** API **
 <hr>
+
 [Shortcuts](#shortcuts-for-convenience) | [getOne **`$1`**](#indomgetoneselector-container) | [get **$a**](#indomgetselector-container) | [getById **$id**](#indomgetbyidid) | [new InDom **$n**](#new-indomsource) | [onReady](#indom-onready-fn)
 
 [getValue](#getvalue-container) | [getValues **$v**](#indom-getvalues-args) | [setValue](#setvalue-value-container)
