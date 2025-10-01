@@ -44,6 +44,18 @@
 [setAttr](#setattr-key-value) | [getAttr](#getattr-key) | [hasAttr](#hasattr-key) | [removeAttr](#removeattr-key) | [getBox](#getbox) | [getOuterBox](#getouterbox) | [getRelativeBox](#getrelativebox) | [addClass](#addclass-names) | [hasClass](#hasclass-name) | [removeClass](#removeclass-names) | [setStyle](#setstyle-property-map-value) | [getStyle](#getstyle-properties)
 
 ## Table of Contents
+- **API**
+[Shortcuts](#shortcuts-for-convenience) | [getOne](#indomgetoneselector-container) | [get](#indomgetselector-container) | [getById](#indomgetbyidid) | [new InDom](#new-indomsource) | [onReady](#indom-onready-fn)
+
+[getValue](#getvalue-container) | [getValues](#indom-getvalues-args) | [setValue](#setvalue-value-container)
+
+[on + onClick , onEnter etc.](#on-type-fn-opts) | [onRemove](#onremove-fn) | [off](#off-type-fn)
+
+[getElement](#getelement-el) | [remove](#remove) | [is](#is-selector) | [getParent](#getparent-selector) | [getNext](#getnext-selector) | [getPrev](#getprev-selector) | [append](#append-children) | [prepend](#prepend-children) | [after](#after-siblings) | [before](#before-siblings)
+
+[setData](#setdata-key-value) | [getData](#getdata-key) | [hasData](#hasdata-key) | [removeData](#removedata-key) | [setAttr](#setattr-key-value) | [getAttr](#getattr-key) | [hasAttr](#hasattr-key) | [removeAttr](#removeattr-key)
+
+[getBox](#getbox) | [getOuterBox](#getouterbox) | [getRelativeBox](#getrelativebox) | [addClass](#addclass-names) | [hasClass](#hasclass-name) | [removeClass](#removeclass-names) | [setS
 
 - **API**
 	- [Shortcuts for convenience](#shortcuts-for-convenience)
