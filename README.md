@@ -298,11 +298,12 @@ Registers a function to run when DOM is ready (or immediately if already ready).
 
 **Examples:**
 ```js
-// If the JavaScript file (containing InDom) is loaded and executed before the HTML DOM content 
-// is fully parsed, attempting to select elements immediately might fail because they don't exist yet.
-// Additionally, adding event listeners to elements that haven't been parsed yet will also fail.
-// Use the InDom.onReady() function to ensure your code runs only after the DOM is fully loaded and ready.
-// Example:
+// If the JavaScript file (containing InDom) is loaded and executed before the HTML DOM 
+// content is fully parsed, attempting to select elements immediately might fail because 
+// they don't exist yet. Additionally, adding event listeners to elements that haven't 
+// been parsed yet will also fail. Use the InDom.onReady() function to ensure your code 
+// runs only after the DOM is fully loaded and ready.
+
 InDom.onReady(() => {
     // Safe to use InDom for quering DOM elements and attach event listeners here
     $1(".example").addClass("on");
