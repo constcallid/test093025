@@ -72,6 +72,7 @@
 <br>
 
 ##API
+##API
 
 ### Shortcuts for convenience
 The convenience shortcuts ($1, $a, $id, $n, $v) are optional and can be renamed, scoped differently, or removed entirely based on your preferences.
