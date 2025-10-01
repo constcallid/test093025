@@ -29,10 +29,11 @@
 **API**
 <table width="100%">
 	<tr>
-		<td width="33%">		
-<div>&#x2218;[Shortcuts for convenience](#shortcuts-for-convenience)</div>
-<div>&#x2218;[InDom.getOne](#indomgetoneselector-container) - **$1**</div>
-<div>&#x2218;[InDom.get](#indomgetselector-container) - **$a**</div>
+		<td width="33%">	
+			
+&#x2218;[Shortcuts for convenience](#shortcuts-for-convenience)<div></div>
+&#x2218;[InDom.getOne](#indomgetoneselector-container) - **$1**<div></div>
+&#x2218;[InDom.get](#indomgetselector-container) - **$a**
 &#x2218;[InDom.getById](#indomgetbyidid) - **$id**
 &#x2218;[new InDom](#new-indomsource) - **$n**
 &#x2218;[InDom.onReady](#indom-onready-fn)
