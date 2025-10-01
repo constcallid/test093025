@@ -28,9 +28,9 @@
 - **API**
 	- [Shortcuts for convenience](#shortcuts-for-convenience)
 	- [InDom.getOne](#indomgetoneselector-container) - **$1**
-	- [InDom.get](#indom-get-selector-container) - **$a**
-	- [InDom.getById](#indom-getbyid-id) - **$id**
-	- [new InDom](#new-indom-source) - **$n**
+	- [InDom.get](#indomgetselector-container) - **$a**
+	- [InDom.getById](#indomgetbyidid) - **$id**
+	- [new InDom](#new-indomsource) - **$n**
 	- [InDom.onReady](#indom-onready-fn)
 	- [.getValue](#getvalue-container)
 	- [InDom.getValues](#indom-getvalues-args) - **$v**
@@ -77,7 +77,7 @@ The convenience shortcuts ($1, $a, $id, $n, $v) are optional and can be renamed,
 [↑TOC](#table-of-contents)
 
 ### `InDom.getOne(selector, container?)`
-**Shortcut:** <span style="color:#04281c;text-shadow:0px 0px 1px;">$1</span>
+Shortcut: **$1**
 
 Queries the DOM using the CSS selector and returns an `InDom` object that contains the matching DOM element.
 Returns `null` if no matching element is found.
@@ -115,7 +115,7 @@ $1('span', div).setStyle('color', 'green');
 [↑TOC](#table-of-contents)
 
 ### `InDom.get(selector, container?)`
-**Shortcut:** <span style="color:#04281c;text-shadow:0px 0px 1px;">$a</span>
+Shortcut: **$a**
 
 Queries the DOM using the CSS selector and returns an `InDomArray` of `InDom` objects for each matching DOM element.
 Returns an empty `InDomArray` if no matching elements are found.
@@ -176,7 +176,7 @@ const example2 = $id("test");
 [↑TOC](#table-of-contents)
 
 ### `new InDom(source)`
-**Shortcut:** <span style="color:#04281c;text-shadow:0px 0px 1px;">$n</span>
+Shortcut: **$n**
 
 Creates a new `InDom` object wrapping a DOM Element or parsing an HTML string to create a DOM Element.
 Returns an existing `InDom` object if one already exists for the given source element.
@@ -191,6 +191,7 @@ Throws a `TypeError` if the source is not a valid DOM Element or HTML string.
 - `TypeError`: If the source is not a valid DOM Element, the document or HTML string of one DOM Element
 
 **Examples:**
+```js
 	// Example 1
 	const img2 = $n('<img src="example-star.png" alt="second star image example" width="50" height="50">');
 	$1('.img-example-2').append(img2);
