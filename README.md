@@ -23,6 +23,26 @@
 - **TypeScript Ready:** Includes built-in types (ES2022 compatible) available in `/src`.
 
 
+## 📋 API Reference
+
+### Core Methods [→](#api-reference)
+[Shortcuts](#shortcuts-for-convenience) | [getOne](#indomgetoneselector-container) | [get](#indomgetselector-container) | [getById](#indomgetbyidid) | [new InDom](#new-indomsource) | [onReady](#indom-onready-fn)
+
+### Value Methods [→](#api-reference)
+[getValue](#getvalue-container) | [getValues](#indom-getvalues-args) | [setValue](#setvalue-value-container)
+
+### Events [→](#api-reference)
+[on/onClick](#on-type-fn-opts) | [onRemove](#onremove-fn) | [off](#off-type-fn)
+
+### DOM Manipulation [→](#api-reference)  
+[getElement](#getelement-el) | [remove](#remove) | [is](#is-selector) | [getParent](#getparent-selector) | [getNext](#getnext-selector) | [getPrev](#getprev-selector) | [append](#append-children) | [prepend](#prepend-children) | [after](#after-siblings) | [before](#before-siblings)
+
+### Data [→](#api-reference)
+[setData](#setdata-key-value) | [getData](#getdata-key) | [hasData](#hasdata-key) | [removeData](#removedata-key)
+
+### Attributes & Styling [→](#api-reference)
+[setAttr](#setattr-key-value) | [getAttr](#getattr-key) | [hasAttr](#hasattr-key) | [removeAttr](#removeattr-key) | [getBox](#getbox) | [getOuterBox](#getouterbox) | [getRelativeBox](#getrelativebox) | [addClass](#addclass-names) | [hasClass](#hasclass-name) | [removeClass](#removeclass-names) | [setStyle](#setstyle-property-map-value) | [getStyle](#getstyle-properties)
+
 ## Table of Contents
 
 - **API**
