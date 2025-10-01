@@ -280,7 +280,7 @@ test3.setStyle('color', 'blue');
 const a = $1('.example');
 const b = $1('.example');
 if (a === b) {
-	console.log("it's the same object");
+	console.log('it\'s the same object');
 }
 ```
 
@@ -306,7 +306,71 @@ Registers a function to run when DOM is ready (or immediately if already ready).
 
 InDom.onReady(() => {
     // Safe to use InDom for quering DOM elements and attach event listeners here
-    $1(".example").addClass("on");
+    $1('.example').addClass('on');
 });
 ```
-	
+
+[↑TOC](#table-of-contents)
+
+
+### `.getValue(container?)`
+**Available on:** `InDom`
+
+Returns the current value of the element, normalized for its type.
+- Single value inputs (`input`, `textarea`, etc.): string or `null`.
+- `select` (single): string or `null`.
+- `select` (multiple): array of selected values or empty array.
+- `input[type=checkbox]` (same name group): array of checked values.
+- `input[type=radio]` (same name group): string of the checked value or `null`.
+- `input[type=file]` (single or multiple): `FileList` object (zero or more files).
+
+**Parameters:**
+- `container` {Document|Element|InDom} (optional) - Scope for checkbox and radio group lookups. When provided, only searches within this container for related elements. Defaults to `document`.
+
+**Returns:**
+- {string|string[]|FileList|null} string for single values, array for multiple/select, FileList for file inputs, `null` when no selection or the element lacks a `value` property
+
+**Throws:**
+- `Error`: If the underlying element has been removed  
+
+**Examples:**
+```html
+<div class="input-examples">
+	<div><input type="text" name="username" value=""></div>
+	<div><textarea name="message"></textarea></div>
+	<div>
+		<select name="color">
+			<option value="red">Red</option>
+			<option value="green" selected>Green</option>
+			<option value="blue">Blue</option>
+		</select>
+	</div>
+	<div>	
+		<select name="size" multiple>
+			<option value="s">Small</option>
+			<option value="m">Medium</option>
+			<option value="l">Large</option>
+		</select>
+	</div>
+	<div>
+		<input type="radio" name="payment" value="credit" id="credit">
+		<label for="credit">Credit Card</label>
+		<input type="radio" name="payment" value="debit" id="debit">
+		<label for="debit">Debit Card</label>
+		<input type="radio" name="payment" value="paypal" id="paypal">
+		<label for="paypal">PayPal</label>
+	</div>
+	<div>
+		<input type="checkbox" name="features" value="wifi" id="wifi">
+		<label for="wifi">WiFi</label>
+		<input type="checkbox" name="features" value="bluetooth" id="bluetooth">
+		<label for="bluetooth">Bluetooth</label>		
+		<input type="checkbox" name="features" value="gps" id="gps">
+		<label for="gps">GPS</label>		
+	</div>
+	<div>
+		<input type="file" name="documents" multiple accept=".pdf,.doc,.docx">
+	</div>
+</div>
+```
+
