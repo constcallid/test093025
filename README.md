@@ -375,7 +375,7 @@ Returns the current value of the element, normalized for its type.
 ```js
 const container = $1('.input-examples');
 
-// Iterate through each direct child <div> within the container.
+// Iterate through each direct div child of the container.
 $a('>div', container).each(div => {
     // Find the first child element within the current div.
     // Based on the HTML structure, this is the actual field input/textarea/select/etc.
@@ -394,23 +394,86 @@ $a('>div', container).each(div => {
 
         // Call the getValue() method on the field and log the result.
         // The output will vary based on the type of field and its current state.
-        console.log(field.getValue());
-        
-        /*
-        Expected outputs based on initial HTML state:
-        - input "username" -> string 
-        - textarea "message" -> string
-        - select "color" -> string (selected color)
-        - select "size" multiple -> array of strings (selected sizes), empty if none selected
-        - radio "payment" -> string (selected payment), null if none selected
-        - checkbox "features" -> array of strings (selected features), empty if none selected
-        - file "documents" -> FileList object, empty if none selected with .length 0
-        */			
+        console.log(field.getValue());		
     });
+    /*
+    Expected outputs based on initial HTML state:
+    - input "username" -> string 
+    - textarea "message" -> string
+    - select "color" -> string (selected color)
+    - select "size" multiple -> array of strings (selected sizes), empty if none selected
+    - radio "payment" -> string (selected payment), null if none selected
+    - checkbox "features" -> array of strings (selected features), empty if none selected
+    - file "documents" -> FileList object, empty if none selected with .length 0
+    */	
 });
 ```
 
 [↑TOC](#table-of-contents)
 
+### `.on(type, fn?, opts?)`
+**Available on:** `InDom`, `InDomArray`
 
+<div style="color:#091987;line-height:130%;font-size:112%;">Registers an event listener that is automatically removed when the element is removed from the DOM (no matter how) , preventing memory leaks.</div>
+
+**Parameters:**
+- `type` {string} - Event type, e.g. 'click', 'keydown'
+- `fn` {Function} (optional) - Event handler function; omit for mouse/click to trigger the event
+- `opts` {AddEventListenerOptions} (optional) - Event options (once, passive, etc.)
+
+**Returns:**
+`{Function|Function[]}` - The internal handler(s) – pass to .off() to remove manually
+
+**Throws:**
+- `Error`: If the underlying element is not connected to DOM, or document not yet loaded 
+- `Error`: If the underlying element(s) has been removed  
+- `Error`: If auto-trigger is used with non-mouse event
+- `TypeError`: If handler is not a function (when provided)
+
+**Shorthand methods:**  
+- `onClick(fn?, opts?)` → `.on('click', fn, opts)`  
+- `onDoubleClick(fn?, opts?)` → `.on('dblclick', fn, opts)`  
+- `onEnter(fn?, opts?)` → `.on('mouseenter', fn, opts)`  
+- `onLeave(fn?, opts?)` → `.on('mouseleave', fn, opts)`  
+- `onFocus(fn?, opts?)` → `.on('focus', fn, opts)`  
+- `onBlur(fn?, opts?)` → `.on('blur', fn, opts)`  
+- `onChange(fn?, opts?)` → `.on('change', fn, opts)`  
+- `once(type, fn, opts?)` → `.on(type, fn, { ...opts, once: true })`
+
+**Examples:**
+```js
+// log every keypress in username / message fields
+$a('[name="username"], [name="message"]').on('keydown', (n, e) => {
+	console.log(`name:${n.getAttr('name')} , key pressed:${e.key} 
+		, current value:${n.getValue()}`);
+	if (e.key === 's') {
+		e.preventDefault(); // block 's' key
+	}
+});
+
+// add / remove hover class on every .example>div
+$a('.example>div').onEnter(n => n.addClass('on'));
+$a(".example>div").onLeave(n => n.removeClass('on'));
+
+// simple accordion: only one panel open at a time
+const menu = $1('#menu');
+const menuBtn = $1('>.btn', menu);
+const search = $1('#search');
+const searchBtn = $1('>.btn', search);
+
+menuBtn.onClick(() => {
+	if (menu.hasClass('on')) { menu.removeClass('on'); return; }
+	if (search.hasClass('on')) { searchBtn.onClick(); } // close other
+	menu.addClass('on');
+});
+
+searchBtn.onClick(() => {
+	if (search.hasClass('on')) { search.removeClass('on'); return; }
+	if (menu.hasClass('on')) { menuBtn.onClick(); } // close other
+	search.addClass('on');
+});
+
+// clicking anywhere adds 'clicked' class to the clicked element
+$n(document).onClick((_, e) => $n(e.target).addClass('clicked'));
+```
 
