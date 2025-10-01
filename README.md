@@ -337,6 +337,7 @@ Returns the current value of the element, normalized for its type.
 ```html
 <div class="input-examples">
 	<div><input type="text" name="username" value=""></div>
+	<details><summary>view full HTML</summary>
 	<div><textarea name="message"></textarea></div>
 	<div>
 		<select name="color">
@@ -371,6 +372,7 @@ Returns the current value of the element, normalized for its type.
 	<div>
 		<input type="file" name="documents" multiple accept=".pdf,.doc,.docx">
 	</div>
+	</details>
 </div>
 ```
 
