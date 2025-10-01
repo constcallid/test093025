@@ -73,6 +73,7 @@
 
 ### Shortcuts for convenience
 The convenience shortcuts ($1, $a, $id, $n, $v) are optional and can be renamed, scoped differently, or removed entirely based on your preferences.
+
 [↑TOC](#table-of-contents)
 
 ### `InDom.getOne(selector, container?)`
@@ -110,6 +111,9 @@ Returns `null` if no matching element is found.
 	const div = $1('.example>div');
 	$1('span', div).setStyle('color', 'green');
 ```
+
+[↑TOC](#table-of-contents)
+
 
 
 	
