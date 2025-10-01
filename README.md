@@ -26,72 +26,55 @@
 
 ## Table of Contents
 
-**API**
-<table width="100%">
-	<tr>
-		<td width="33%">	
-			
-&#x2218; [Shortcuts for convenience](#shortcuts-for-convenience)<br>
-&#x2218; [InDom.getOne](#indomgetoneselector-container) - **$1**<br>
-&#x2218; [InDom.get](#indomgetselector-container) - **$a**<br>
-&#x2218; [InDom.getById](#indomgetbyidid) - **$id**<br>
-&#x2218; [new InDom](#new-indomsource) - **$n**<br>
-&#x2218; [InDom.onReady](#indom-onready-fn)<br>
-&#x2218; [.getValue](#getvalue-container)<br>
-&#x2218; [InDom.getValues](#indom-getvalues-args) - **$v**<br>
-&#x2218; [.setValue](#setvalue-value-container)<br>
-&#x2218; [.on + .onClick , onEnter etc.](#on-type-fn-opts)<br>
-&#x2218; [.onRemove](#onremove-fn)<br>
-&#x2218; [.off](#off-type-fn)<br>
-&#x2218; [.setData](#setdata-key-value)<br>
-&#x2218; [.getData](#getdata-key)<br>
-&#x2218; [.hasData](#hasdata-key)<br>
-&#x2218; [.removeData](#removedata-key)<br>
-<br>
-		</td>
-		<td width="34%">
-		
-&#x2218; [.getElement / .el](#getelement-el)<br>
-&#x2218; [.remove](#remove)<br>
-&#x2218; [.is](#is-selector)<br>
-&#x2218; [.getParent](#getparent-selector)<br>
-&#x2218; [.getSelfOrParent](#getselforparent-selector)<br>
-&#x2218; [.getNext](#getnext-selector)<br>
-&#x2218; [.getPrev](#getprev-selector)<br>
-&#x2218; [.setHtml](#sethtml-content)<br>
-&#x2218; [.getHtml](#gethtml)<br>
-&#x2218; [.append](#append-children)<br>
-&#x2218; [.prepend](#prepend-children)<br>
-&#x2218; [.after](#after-siblings)<br>
-&#x2218; [.before](#before-siblings)<br>
-&#x2218; [.setAttr](#setattr-key-value)<br>
-&#x2218; [.getAttr](#getattr-key)<br>
-&#x2218; [.hasAttr](#hasattr-key)<br>
-&#x2218; [.removeAttr](#removeattr-key)<br>
-		</td>
-		<td width="33%">
-		
-&#x2218; [.getBox](#getbox)<br>
-&#x2218; [.getOuterBox](#getouterbox)<br>
-&#x2218; [.getRelativeBox](#getrelativebox)<br>
-&#x2218; [.addClass](#addclass-names)<br>
-&#x2218; [.hasClass](#hasclass-name)<br>
-&#x2218; [.removeClass](#removeclass-names)<br>
-&#x2218; [.setStyle](#setstyle-property-map-value)<br>
-&#x2218; [.getStyle(...properties?)](#getstyle-properties)<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-		</td>				
-	</tr>
-</table>
-
+- **API**
+	- [Shortcuts for convenience](#shortcuts-for-convenience)
+	- [InDom.getOne](#indomgetoneselector-container) - **$1**
+	- [InDom.get](#indomgetselector-container) - **$a**
+	- [InDom.getById](#indomgetbyidid) - **$id**
+	- [new InDom](#new-indomsource) - **$n**
+	- [InDom.onReady](#indom-onready-fn)
+	
+	- [.getValue](#getvalue-container)
+	- [InDom.getValues](#indom-getvalues-args) - **$v**
+	- [.setValue](#setvalue-value-container)
+	
+	
+	- [.on + .onClick , onEnter etc.](#on-type-fn-opts)
+	- [.onRemove](#onremove-fn)
+	- [.off](#off-type-fn)
+	
+	
+	- [.setData](#setdata-key-value)
+	- [.getData](#getdata-key)
+	- [.hasData](#hasdata-key)
+	- [.removeData](#removedata-key)
+	
+	
+	- [.getElement / .el](#getelement-el)
+	- [.remove](#remove)
+	- [.is](#is-selector)
+	- [.getParent](#getparent-selector)
+	- [.getSelfOrParent](#getselforparent-selector)
+	- [.getNext](#getnext-selector)
+	- [.getPrev](#getprev-selector)
+	- [.append](#append-children)
+	- [.prepend](#prepend-children)
+	- [.after](#after-siblings)
+	- [.before](#before-siblings)
+	
+	
+	- [.setAttr](#setattr-key-value)
+	- [.getAttr](#getattr-key)
+	- [.hasAttr](#hasattr-key)
+	- [.removeAttr](#removeattr-key)
+	- [.getBox](#getbox)
+	- [.getOuterBox](#getouterbox)
+	- [.getRelativeBox](#getrelativebox)
+	- [.addClass](#addclass-names)
+	- [.hasClass](#hasclass-name)
+	- [.removeClass](#removeclass-names)
+	- [.setStyle](#setstyle-property-map-value)
+	- [.getStyle(...properties?)](#getstyle-properties)
 
 
 ##API
