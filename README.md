@@ -192,96 +192,95 @@ Throws a `TypeError` if the source is not a valid DOM Element or HTML string.
 
 **Examples:**
 ```js
-	// Example 1
-	const img2 = $n('<img src="example-star.png" alt="second star image example" width="50" height="50">');
-	$1('.img-example-2').append(img2);
+// Example 1
+const img2 = $n('<img src="example-star.png" alt="second star image example" width="50" height="50">');
+$1('.img-example-2').append(img2);
 
-	// Example 2
-	const container = $id('img-container');
-	const btn = $1('>.btn', container);
-	/* </span><span style="color:#D73A49">@type</span><span style="color:#6F42C1"> {InDom}</span><span style="color:#6A737D">/
-	let img;
+// Example 2
+const container = $id('img-container');
+const btn = $1('>.btn', container);
+/** @type {InDom} */
+let img;
 
-	// Define the click handler for the button (no need for the InDom object or the event arguments here).
-	// It either loads an image for the first time or toggles the image source on subsequent clicks.
-	btn.onClick(() => {
+// Define the click handler for the button (no need for the InDom object or the event arguments here).
+// It either loads an image for the first time or toggles the image source on subsequent clicks.
+btn.onClick(() => {
 
-		// Image has not been loaded/created yet
-		if (!img) {
-			// Check if an image load is already in progress to prevent duplicate requests.
-			if (btn.getData('loading') === 1) {
-				btn.setHtml('the image is loading...');
-				// Exit the handler early as no further action is needed.
-				return;
-			}
-
-			// Create a native HTML Image object.
-			const imgEl = new Image();
-
-			// Define the callback for when the image finishes loading successfully.
-			imgEl.onload = () => {
-				// Wrap the loaded native image element in an InDom object
-				img = $n(imgEl);
-				img.setAttr('alt', 'a star image example');
-				// Append the InDom-wrapped image to the container element.
-				container.append(img);
-				btn.setData('loading', 0).setHtml('change img');
-			};
-
-			// Configure the image source and initial properties.
-			imgEl.src = 'example-star.png';
-			imgEl.width = 50;
-			imgEl.height = 50;
-
-			// Set a flag on the button to indicate that an image load is now in progress.
-			btn.setData('loading', 1);
-			// Exit the handler as the load process has started.
-			// Note: A production implementation should also handle img.onerror etc.
+	// Image has not been loaded/created yet
+	if (!img) {
+		// Check if an image load is already in progress to prevent duplicate requests.
+		if (btn.getData('loading') === 1) {
+			btn.setHtml('the image is loading...');
+			// Exit the handler early as no further action is needed.
 			return;
 		}
 
-		// Image already exists, toggle its source
-		// Check the current src to determine which image to switch to.
-		if (img.getAttr('src') == "example-cloud.png") {
-			// If it's currently showing the 'cloud' image, switch to the 'star' image.
-			img.setAttr('src', 'example-star.png')
-				.setAttr('alt', 'a star image example');
-			// Exit after that
-			return;
-		}
-		// It is a 'star', switch to the 'cloud' image.
-		img.setAttr('src', 'example-cloud.png')
-			.setAttr('alt', 'a cloud image example');
+		// Create a native HTML Image object.
+		const imgEl = new Image();
+
+		// Define the callback for when the image finishes loading successfully.
+		imgEl.onload = () => {
+			// Wrap the loaded native image element in an InDom object
+			img = $n(imgEl);
+			img.setAttr('alt', 'a star image example');
+			// Append the InDom-wrapped image to the container element.
+			container.append(img);
+			btn.setData('loading', 0).setHtml('change img');
+		};
+
+		// Configure the image source and initial properties.
+		imgEl.src = 'example-star.png';
+		imgEl.width = 50;
+		imgEl.height = 50;
+
+		// Set a flag on the button to indicate that an image load is now in progress.
+		btn.setData('loading', 1);
+		// Exit the handler as the load process has started.
+		// Note: A production implementation should also handle img.onerror etc.
 		return;
-	});
-
-
-	// Notice
-	const test1 = $n('<div><span>one single parent element</span></div>');
-	// will work , but: 
-	try {
-		const test2 =
-			$n('<div><span>div 1</span></div><div><span>div 2</span></div>');
-		// will throw a TypeError because you can create one InDom object only for one element 
 	}
-	catch (e) {
-		console.log(e);
+
+	// Image already exists, toggle its source
+	// Check the current src to determine which image to switch to.
+	if (img.getAttr('src') == "example-cloud.png") {
+		// If it's currently showing the 'cloud' image, switch to the 'star' image.
+		img.setAttr('src', 'example-star.png')
+			.setAttr('alt', 'a star image example');
+		// Exit after that
+		return;
 	}
-	// in case you need to insert multiple elements set the HTML of the parent element 
-	// or append / prepend HTML to it , and then get the InDom object you want: e.g. 
-	$1('.example>div')
-		.setHtml('<div><span>div 1</span></div><div><span>div 2</span></div>');
-	const test3 = $1('.example>div>div:nth-child(2)');
-	test3.setStyle('color', 'blue');
+	// It is a 'star', switch to the 'cloud' image.
+	img.setAttr('src', 'example-cloud.png')
+		.setAttr('alt', 'a cloud image example');
+	return;
+});
 
 
-	//InDom objects are created only once for the same DOM element
-	const a = $1('.example');
-	const b = $1('.example');
-	if(a === b)
-	{
-		console.log("it's the same object");
-	}
+// Notice
+const test1 = $n('<div><span>one single parent element</span></div>');
+// will work , but: 
+try {
+	const test2 =
+		$n('<div><span>div 1</span></div><div><span>div 2</span></div>');
+	// will throw a TypeError because you can create one InDom object only for one element 
+}
+catch (e) {
+	console.log(e);
+}
+// in case you need to insert multiple elements set the HTML of the parent element 
+// or append / prepend HTML to it , and then get the InDom object you want: e.g. 
+$1('.example>div')
+	.setHtml('<div><span>div 1</span></div><div><span>div 2</span></div>');
+const test3 = $1('.example>div>div:nth-child(2)');
+test3.setStyle('color', 'blue');
+
+
+//InDom objects are created only once for the same DOM element
+const a = $1('.example');
+const b = $1('.example');
+if (a === b) {
+	console.log("it's the same object");
+}
 ```
 
 [↑TOC](#table-of-contents)
