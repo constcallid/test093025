@@ -26,7 +26,7 @@
 
 ## Table of Contents
 
-- **API**
+**API**
 <table width="100%">
 	<tr>
 		<td width="33%">
@@ -49,6 +49,7 @@
 &#x2218;[.removeData](#removedata-key)
 		</td>
 		<td width="34%">
+		
 &#x2218;[.getElement / .el](#getelement-el)
 &#x2218;[.remove](#remove)
 &#x2218;[.is](#is-selector)
@@ -68,6 +69,7 @@
 &#x2218;[.removeAttr](#removeattr-key)
 		</td>
 		<td width="33%">
+		
 &#x2218;[.getBox](#getbox)
 &#x2218;[.getOuterBox](#getouterbox)
 &#x2218;[.getRelativeBox](#getrelativebox)
