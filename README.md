@@ -193,7 +193,8 @@ Throws a `TypeError` if the source is not a valid DOM Element or HTML string.
 **Examples:**
 ```js
 // Example 1
-const img2 = $n('<img src="example-star.png" alt="second star image example" width="50" height="50">');
+const img2 = $n(
+	'<img src="example-star.png" alt="second star image example" width="50" height="50">');
 $1('.img-example-2').append(img2);
 
 // Example 2
@@ -202,8 +203,10 @@ const btn = $1('>.btn', container);
 /** @type {InDom} */
 let img;
 
-// Define the click handler for the button (no need for the InDom object or the event arguments here).
-// It either loads an image for the first time or toggles the image source on subsequent clicks.
+// Define the click handler for the button (no need for the InDom object 
+// or the event arguments here).
+// It either loads an image for the first time or toggles the image source 
+// on subsequent clicks.
 btn.onClick(() => {
 
 	// Image has not been loaded/created yet
