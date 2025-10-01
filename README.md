@@ -68,9 +68,9 @@
 	- [.removeClass](#removeclass-names)
 	- [.setStyle](#setstyle-property-map-value)
 	- [.getStyle(...properties?)](#getstyle-properties)
-
-
-
+	
+	
+	
 ##API
 
 ### Shortcuts for convenience
