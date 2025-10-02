@@ -4,7 +4,7 @@
 
 - **Lightweight:** Only **3.7KB gzipped** – adds minimal overhead.
 
-- **Complete Innovative DOM Solution:** Comprehensive API with single-instance objects per element – eliminating duplication and boosting performance for element selection, manipulation, traversal, event handling and more. 
+- **Intuitive DOM Toolkit:** Comprehensive API with single-instance objects per element – eliminating duplication and boosting performance for element selection, manipulation, traversal, event handling and more. 
 
 - **Modern JavaScript:** Built with ES2022, empowers clean and maintainable code.
 
@@ -16,9 +16,11 @@
 
 - **Modern Browser Support:** Compatible with all modern browsers (see browser support for more).
 
-- **Powerful Fields Handling:** Advanced form field handling with automatic type normalization and validation.
+- **Auto-Typed Field IO:** One-line get / set for any input—checkbox arrays, multi-select, files, radios etc. No need for manual branching.
 
-- **Multiple Formats:** Distributed in Plain JavaScript, ESM modules, and TypeScript formats.
+- **Smart Value Harvester:** Turns any container into a plain object of field values—single call, auto-typed, with dynamic-name grouping and zero config.
+
+- **Three Distribution Formats:** Plain JavaScript, ESM modules, and TypeScript.
 
 - **TypeScript Ready:** Includes built-in types (ES2022 compatible) available in `/src`.
 
