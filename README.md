@@ -38,7 +38,7 @@
 
 [Shortcuts](#shortcuts) | [getOne → **$1**](#indomgetoneselector-container) | [get → **$a**](#indomgetselector-container) | [getById → **$id**](#indomgetbyidid) | [new InDom → **$n**](#new-indomsource) | [onReady](#indomonreadyfn)
 
-[getValue](#getvaluecontainer) | [getValues → **$v**](#indom-getvalues-args) | [setValue](#setvalue-value-container)
+[getValue](#getvaluecontainer) | [getValues → **$v**](#indomgetvaluesargs) | [setValue](#setvalue-value-container)
 
 [on (+ onClick , onEnter etc.)](#on-type-fn-opts) | [onRemove](#onremove-fn) | [off](#off-type-fn)
 
@@ -480,6 +480,42 @@ console.log(o);
 //{"username":"Alice","message":"",..."name_34":"Bob","age_34":"28",
 //"name_65":"Carol","age_65":"32"}
 ```
+
+[↑TOC](#table-of-contents)
+
+### `.setValue(value, container?)`
+**Available on:** `InDom`, `InDomArray`
+
+Sets the element’s value, normalised for its type (see [getValue()](#getvalue-container)).
+
+**Parameters:**
+- `value` {string|string[]} - Value(s) to assign
+- `container` {Document|Element|InDom} (optional) - Scope for checkbox and radio group lookups. When provided, only searches within this container for related elements. Defaults to `document`.
+
+**Returns:**
+`{InDom|InDomArray}` - `this` for chaining
+
+**Throws:**
+- `TypeError`: If the element has no writable value
+- `Error`: If the underlying element(s) has been removed  
+
+**Examples:**
+```js
+// single text input
+$1('[name="username"]').setValue('Bob');
+
+// multiple select
+$1('[name="size"]').setValue(['m','l']);
+
+// check only 'gps' in this container (other containers ignored)
+const div = $1('.input-examples');
+$1('[name="features"]', div).setValue('gps', div);
+// a single value can be set with a string or a one-item array
+
+// clear all editable fields
+$a('input, textarea, select').setValue(null);
+```
+
 [↑TOC](#table-of-contents)
 
 ### `.on(type, fn?, opts?)`
