@@ -42,9 +42,9 @@
 
 [on (+ onClick , onEnter etc.)](#on-type-fn-opts) | [onRemove](#onremove-fn) | [off](#off-type-fn)
 
-[getElement / el](#getelement-el) | [remove](#remove) | [is](#is-selector) | [getParent](#getparent-selector) | [getSelfOrParent](#getparent-selector) | [getNext](#getnext-selector) | [getPrev](#getprev-selector) | [append](#append-children) | [prepend](#prepend-children) | [after](#after-siblings) | [before](#before-siblings)
+[getElement / el](#getelement-el) | [remove](#remove) | [is](#is-selector) | [getParent](#getparent-selector) | [getSelfOrParent](#getparent-selector) | [getNext](#getnext-selector) | [getPrev](#getprev-selector) | [append](#append-children) | [prepend](#prepend-children) | [after](#after-siblings) | [before](#before-siblings) | [setHtml](#setdata-key-value) | [getHtml](#getdata-key)
 
-[setData](#setdata-key-value) | [getData](#getdata-key) | [hasData](#hasdata-key) | [removeData](#removedata-key) | [setAttr](#setattr-key-value) | [getAttr](#getattr-key) | [hasAttr](#hasattr-key) | [removeAttr](#removeattr-key) | [setHtml](#setdata-key-value) | [getHtml](#getdata-key)
+[setData](#setdata-key-value) | [getData](#getdata-key) | [hasData](#hasdata-key) | [removeData](#removedata-key) | [setAttr](#setattr-key-value) | [getAttr](#getattr-key) | [hasAttr](#hasattr-key) | [removeAttr](#removeattr-key)
 
 [getBox](#getbox) | [getOuterBox](#getouterbox) | [getRelativeBox](#getrelativebox) | [addClass](#addclass-names) | [hasClass](#hasclass-name) | [removeClass](#removeclass-names)  | [setStyle](#setstyle-property-map-value) | [getStyle](#getstyle-properties)
 <hr>
@@ -922,21 +922,6 @@ $a('>li', ul).before('<span>test</span>'); // bulk before to every <li> of ul
 
 [↑TOC](#table-of-contents)
 
-
-[↑TOC](#table-of-contents)
-
-
-[↑TOC](#table-of-contents)
-
-
-[↑TOC](#table-of-contents)
-
-
-[↑TOC](#table-of-contents)
-
-
-[↑TOC](#table-of-contents)
-
 ### `.setHtml(content)`
 **Available on:** `InDom`, `InDomArray`
 
@@ -996,15 +981,498 @@ console.log(html);
 
 [↑TOC](#table-of-contents)
 
+### `.setData(key, value)`
+**Available on:** `InDom`, `InDomArray`
+
+Stores a key/value pair in memory **or** updates the element’s `data-*` attribute (if it already exists) with the stringified value.
+
+**Parameters:**  
+- `key` {string} - Data key
+- `value` {any} - Data value (will be coerced to string for `data-*` attributes)
+
+**Returns:**  
+{InDom|InDomArray} - `this` for chaining
+
+**Throws:**  
+- `Error`: If the underlying element has already been removed  
+
+**Examples:**
+```js
+const div = $1('.example>div');
+
+// click-counter stored in memory
+div.onClick(() => {
+	// read counter (default 0 if never stored)
+	const clicks = div.getData('clicked') ?? 0;
+	div.setData('clicked', clicks + 1);
+});
+
+// store object and int
+div.setData('user', { id: 34, name: 'Bob' });
+console.log(div.hasData('user') ? 'has data key: user' 
+	: 'doesn\'t have data key: user');
+//has data key: user
+
+div.setData('test', 1);
+
+console.log([div.getData('user'), div.getData('test')]); // [{id: 34, name: 'Bob'}, 1]
+
+// remove only 'user'
+div.removeData('user');
+console.log([div.getData('user'), div.getData('test')]); // [undefined, 1]	
+
+
+// grab every editable field inside the first .input-examples
+const fields = $a('input, textarea, select', $1('.input-examples'));
+
+// snapshot original values as JSON strings
+fields.each(n => n.setData('originalValue', JSON.stringify(n.getValue())));
+
+// button to check if anything changed
+$1('body').append('<div>Any field modified?</div>');
+$1('.checkBtn').onClick(() => {
+	// InDomArray extends Array and inherits all standard array methods.
+	// true if any field's current value differs from its snapshot (stops at first true)
+	const modified = fields.some(n =>
+		n.getData('originalValue') !== JSON.stringify(n.getValue())
+	);
+	console.log(modified ? 'modified' : 'same');
+});
+
+// The above is to demonstrate different concepts because with InDom you could just:
+const section = $1('.input-examples');
+$1('body').append('<div>Any field modified? (rw)</div>');
+const original = JSON.stringify($v(section));
+$1('.rwCheckBtn').onClick(() => console.log(
+	original === JSON.stringify($v(section)) ? 'same' : 'modified'
+));
+```
 
 [↑TOC](#table-of-contents)
 
+### `.getData(key)`
+**Available on:** `InDom`
+
+Returns the `data-*` attribute value (as string) if it exists, otherwise the in-memory value.  
+Returns `null` if the key is not found in either place.
+
+**Parameters:**  
+- `key` {any} - Key to look up (stringified for `data-*` attributes)
+
+**Returns:**  
+{any} - The stored value, or `null` if not found
+
+**Throws:**  
+- `Error`: If the underlying element has been removed  
+
+**Examples:**
+see [setData()](#setdata-key-value)
 
 [↑TOC](#table-of-contents)
 
+### `.hasData(key)`
+**Available on:** `InDom`
+
+Returns `true` if the underlying element has a `data-*` attribute **or** in its internal memory map, otherwise `false`.
+
+**Parameters:**  
+- `key` {string} - Data key to test (automatically prefixed with `data-` for attribute check)
+
+**Returns:**  
+{boolean} - `true` when the key exists, `false` otherwise
+
+**Throws:**  
+- `Error`: If the underlying element has been removed
+
+**Examples:**
+see [setData()](#setdata-key-value)
 
 [↑TOC](#table-of-contents)
 
+### `.removeData(key)`
+**Available on:** `InDom`, `InDomArray`
+
+Removes the key from the `data-*` attribute **or** from internal memory map,  whichever contains it. 
+
+**Parameters:**  
+- `key` {any} - Key to remove (stringified for `data-*` attributes)
+
+**Returns:**  
+{InDom|InDomArray} - `this` for chaining
+
+**Throws:**  
+- `Error`: If the underlying element(s) has been removed  
+
+**Examples:**
+see [setData()](#setdata-key-value)
+
+[↑TOC](#table-of-contents)
+
+### `.setAttr(key, value)`
+**Available on:** `InDom`, `InDomArray`
+
+Sets an attribute value to the underlying element.
+
+**Parameters:**  
+- `key` {string} - Attribute key.
+- `value` {any} - Attribute value (will be coerced to string for ). 
+
+**Returns:**  
+{InDom|InDomArray} - `this` for chaining
+
+**Throws:**  
+- `Error`: If the underlying element(s) has been removed 
+
+**Examples:**
+```js
+const img = $n('<img src="example-star.png" width="50" height="50">');
+
+// helper: return attr value if the attribute exists or 'no alt' if doesn't
+const getImgAlt = () => img.hasAttr('alt') ? img.getAttr('alt') : 'no alt';
+
+console.log(`img alt:${getImgAlt()}`); // no alt 
+
+img.setAttr('alt','example image'); 
+console.log(`img alt:${getImgAlt()}`); // example image
+
+img.removeAttr('alt');
+console.log(`img alt:${getImgAlt()}`); // no alt
+```
+
+[↑TOC](#table-of-contents)
+
+### `.getAttr(key)`
+**Available on:** `InDom`
+
+Gets the value of an attribute of the underlyuing element.
+
+**Parameters:**  
+- `key` {string} - The attribute key.
+
+**Returns:**  
+{string|null} - The attribute , null if the attribute doesn't exists  
+
+**Throws:**  
+- `Error`: If the underlying element has been removed 
+
+**Examples:**
+see [setAttr()](#setattr-key-value)
+
+[↑TOC](#table-of-contents)
+
+### `.hasAttr(key)`
+**Available on:** `InDom`
+
+Checks if the underlying element has an attribute.
+
+**Parameters:**  
+- `key` {string} - The attribute key.
+
+**Returns:**  
+{boolean} - `true` if the attribute exists, `false` otherwise.
+
+**Throws:**  
+- `Error`: If the underlying element has been removed 
+
+**Examples:**
+see [setAttr()](#setattr-key-value)
+
+[↑TOC](#table-of-contents)
+
+### `.removeAttr(key)`
+**Available on:** `InDom`, `InDomArray`
+
+Removes an attribute from the underlying element(s). 
+
+**Parameters:**  
+- `key` {string} - Attribute key. 
+
+**Returns:**  
+{InDom|InDomArray} - `this` for chaining
+
+**Throws:**  
+- `Error`: If the underlying element(s) has been removed 
+
+**Examples:**
+see [setAttr()](#setattr-key-value)
+[↑TOC](#table-of-contents)
+
+[↑TOC](#table-of-contents)
+
+### `.getBox()`
+**Available on:** `InDom`
+
+Returns a DOMRect with the underlying element’s viewport-relative bounding box.
+
+**Returns:**  
+{DOMRect} - Native object with left / x, top / y, width, height, right, bottom.
+
+**Throws:**  
+- `Error`: If the underlying element has been removed 
+
+**Examples:**
+```js
+const div = $n('<div></div>');
+div.setStyle({
+	display: 'inline-block',
+	position: 'fixed',
+	top: '110px',
+	left: '130px',
+	width: '100px',
+	height: '150px',
+	backgroundColor: 'blue'
+});
+
+//console.log(div.getBox());
+console.log(JSON.stringify(div.getBox()));
+//DOMRect {"x":0,"y":0,"width":0,"height":0,"top":0,"right":0,"bottom":0,"left":0}
+//because it is not yet connected to DOM 
+
+$1('body').append(div);
+console.log(div.getBox());
+console.log(JSON.stringify(div.getBox()));
+//DOMRect {"x":130,"y":110,"width":100,"height":150,"top":110,"right":230,
+//"bottom":260,"left":130}
+```
+
+[↑TOC](#table-of-contents)
+
+### `.getOuterBox()`
+**Available on:** `InDom`
+
+Returns a DOMRect that expands the underlying element’s bounding box by its margins.
+
+**Returns:**  
+{DOMRect} - Native object with left / x, top / y, width, height, right, bottom.
+
+**Throws:**  
+- `Error`: If the underlying element has been removed 
+
+**Examples:**
+```js
+const div = $n('<div></div>');
+div.setStyle({
+	'display': 'inline-block',
+	'position': 'fixed',
+	'top': '110px',
+	'left': '130px',
+	'width': '100px',
+	'height': '150px',
+	'background-color': 'blue',
+	'margin': '10px 20px'
+});
+
+$1('body').append(div);
+
+console.log(div.getBox());
+//DOMRect {"top":120,"left":150,"right":250,"bottom":270,"width":100,"height":150}
+
+const outerBox = div.getOuterBox();
+console.log(outerBox);
+//DOMRect {"x":130,"y":110,"width":140,"height":170,"top":110,"right":270,
+//"bottom":280,"left":130}
+
+const div2 = $n('<div></div>');
+div2.setStyle({
+	'display': 'inline-block',
+	'position': 'fixed',
+	'top': outerBox.top + 'px',
+	'left': outerBox.left + 'px',
+	'width': outerBox.width + 'px',
+	'height': outerBox.height + 'px',
+	'background-color': 'red'
+});
+$1('body').append(div2);
+// red div2 overlay: exactly covers the margin box of the div blue element
+```
+
+[↑TOC](#table-of-contents)
+
+### `.getRelativeBox()`
+**Available on:** `InDom`
+
+Returns a DOMRect with coordinates relative to the underlying element’s offset parent(borders of the parent are excluded).
+
+**Returns:**  
+{DOMRect} - Native object with left / x, top / y, width, height, right, bottom.
+
+**Throws:**  
+- `Error`: If the underlying element has been removed 
+
+**Examples:**
+```js
+const div = $n('<div></div>');
+div.setStyle({
+	display: 'inline-block',
+	position: 'fixed',
+	top: '110px',
+	left: '130px',
+	width: '100px',
+	height: '150px',
+	backgroundColor: 'blue'
+});
+$1('body').append(div);
+console.log(JSON.stringify(div.getBox()));
+//DOMRect {"x":130,"y":110,"width":100,"height":150,"top":110,"right":230,
+//"bottom":260,"left":130}
+
+const innerDiv = $n('<div></div>');
+innerDiv.setStyle({
+	display: 'inline-block',
+	position: 'absolute',
+	top: '10px',
+	left: '30px',
+	width: '30px',
+	height: '50px',
+	backgroundColor: 'red'
+});
+div.append(innerDiv);
+console.log(JSON.stringify(innerDiv.getRelativeBox()));
+//DOMRect {"x":30,"y":10,"width":30,"height":50,"top":10,"right":60,
+//"bottom":60,"left":30}
+// red innerDiv: positioned inside blue div; coords are relative to blue’s padding box
+```
+
+[↑TOC](#table-of-contents)
+
+### `.addClass(...names)`
+**Available on:** `InDom`, `InDomArray`
+
+Adds one or more CSS classes to the underlying element(s).
+
+**Parameters:**  
+- `names` {...string} names - Class name(s) to add (variadic)
+
+**Returns:**  
+{InDom|InDomArray} - `this` for chaining
+
+**Throws:**  
+- `Error`: If the underlying element(s) has been removed 
+
+**Examples:**
+```js
+// add 'clicked' class to any .example>div that gets clicked
+const divs = $a('.example>div');
+divs.onClick(n => n.addClass('clicked'));
+
+// button: counts how many are currently clicked, then resets them
+const sumResetClicked = $n('<div>Sum and reset clicked</div>');
+$1('body').append(sumResetClicked);
+
+sumResetClicked.onClick(() => {
+  let clicked = 0;
+  divs.each(n => {
+    if (n.hasClass('clicked')) { // test state
+      clicked++;
+      n.removeClass('clicked'); // reset state
+    }
+  });
+  console.log('clicked:' + clicked);
+});
+```
+
+[↑TOC](#table-of-contents)
+
+### `.hasClass(name)`
+**Available on:** `InDom`
+
+ Tests whether the underlying element has the given CSS class.
+
+**Parameters:**  
+- `name` {string} - Class name to test.
+
+**Returns:**  
+{boolean} - `true` if the class is present, `false` otherwise.
+
+**Throws:**  
+- `Error`: If the underlying element has been removed 
+
+**Examples:**
+see [addClass()](#addclass-names)
+
+[↑TOC](#table-of-contents)
+
+### `.removeClass(...names)`
+**Available on:** `InDom`, `InDomArray`
+
+Removes one or more CSS classes from the underlying element(s).
+
+**Parameters:**  
+- `names` {...string} names - Class name(s) to remove (variadic)
+
+**Returns:**  
+{InDom|InDomArray} - `this` for chaining
+
+**Throws:**  
+- `Error`: If the underlying element(s) has been removed 
+
+**Examples:**
+see [addClass()](#addclass-names)
+
+[↑TOC](#table-of-contents)
+
+### `.setStyle(property | map, value?)`
+**Available on:** `InDom`, `InDomArray`
+
+Sets one or more CSS properties to the underlying element(s). Dash-case names are auto-converted to camel-case.
+
+**Parameters:**  
+- `property` {string} - Property name (dash-case or camel-case)  
+- `value` {string} - Value to assign (when first arg is a string)  
+- `map` {Object} - Object map `{ prop: value, ... }` for bulk assignment  
+
+**Returns:**  
+{InDom|InDomArray} - `this` for chaining  
+
+**Throws:**  
+- `Error` - If the underlying element(s) has been removed  
+- `TypeError` - If a single argument is not an object 
+
+**Examples:**
+```js
+const div = $n('<div></div>');
+$1('body').append(div);
+
+// single property
+div.setStyle('background-color', 'blue');
+console.log(div.getStyle('background-color'));
+// rgb(0, 0, 255)
+
+// bulk assignment + multi-read
+div.setStyle({ width: '100px', height: '50px', fontSize: '16px' });
+console.log(div.getStyle('width', 'height', 'font-size'));
+// {width: '100px', height: '50px', 'font-size': '16px'}
+
+// apply to collection
+$a('.example>div').setStyle({ color: 'blue', 'font-size': '15px' });
+
+// inspect every computed property
+const styles = $1('.example>div').getStyle();
+console.log([styles.color, styles.fontSize]);
+// ['rgb(0, 0, 255)', '15px']
+```
+
+[↑TOC](#table-of-contents)
+
+### `.getStyle(...properties?)`
+**Available on:** `InDom`
+
+ Gets computed CSS value(s) for the underlying element.
+
+**Parameters:**  
+- `properties` {...string} [optional] - Zero or more CSS property names (dash-case).
+
+**Returns:**  
+{CSSStyleDeclaration|string|Object<string,string>} 
+- When no arguments are supplied the full CSSStyleDeclaration is returned.
+- When exactly one property is supplied its computed value is returned as a string.
+- When two or more properties are supplied an object map { prop: value } is returned.
+
+**Throws:**  
+- `Error`: If the underlying element has been removed 
+
+**Examples:**
+see [setStyle()](#setstyle-property-map-value)
 
 [↑TOC](#table-of-contents)
 
