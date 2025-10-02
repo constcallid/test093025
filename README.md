@@ -30,15 +30,15 @@
 
 ### Getting Started
 
-[Shortcuts](#shortcuts-for-convenience) | [getOne → **$1**](#indomgetoneselector-container) | [get → **$a**](#indomgetselector-container) | [getById → **$id**](#indomgetbyidid) | [new InDom → **$n**](#new-indomsource) | [onReady](#indom-onready-fn)
+[Shortcuts](#shortcuts-for-convenience) | [getOne → **$1**](#indomgetoneselector-container) | [get → **$a**](#indomgetselector-container) | [getById → **$id**](#indomgetbyidid) | [new InDom → **$n**](#new-indomsource) | [onReady](#indomonreadyfn)
 
 <hr>
 
 ### API Reference
 
-[Shortcuts](#shortcuts-for-convenience) | [getOne → **$1**](#indomgetoneselector-container) | [get → **$a**](#indomgetselector-container) | [getById → **$id**](#indomgetbyidid) | [new InDom → **$n**](#new-indomsource) | [onReady](#indom-onready-fn)
+[Shortcuts](#shortcuts) | [getOne → **$1**](#indomgetoneselector-container) | [get → **$a**](#indomgetselector-container) | [getById → **$id**](#indomgetbyidid) | [new InDom → **$n**](#new-indomsource) | [onReady](#indomonreadyfn)
 
-[getValue](#getvalue-container) | [getValues → **$v**](#indom-getvalues-args) | [setValue](#setvalue-value-container)
+[getValue](#getvaluecontainer) | [getValues → **$v**](#indom-getvalues-args) | [setValue](#setvalue-value-container)
 
 [on (+ onClick , onEnter etc.)](#on-type-fn-opts) | [onRemove](#onremove-fn) | [off](#off-type-fn)
 
@@ -61,7 +61,7 @@
 ## API
 
 
-### Shortcuts for convenience
+### Shortcuts
 The convenience shortcuts ($1, $a, $id, $n, $v) are optional and can be renamed, scoped differently, or removed entirely based on your preferences.
 
 [↑TOC](#table-of-contents)
@@ -142,7 +142,7 @@ $a('.example>div').each(n => {
 [↑TOC](#table-of-contents)
 
 ### `InDom.getById(id)`
-**Shortcut:** <span style="color:#04281c;text-shadow:0px 0px 1px;">$id</span>
+Shortcut: **$id**
 
 Fetches the element with the specified ID and returns an `InDom` object that contains it.
 Returns `null` if no element with the given ID is found.
@@ -409,6 +409,77 @@ $a('>div', container).each(div => {
 });
 ```
 
+[↑TOC](#table-of-contents)
+
+### `InDom.getValues(...args?)`
+Shortcut: **$v**
+
+Returns a plain object with field names as keys and their [getValue()](#getvalue-container) results as values.
+<div style="color:#091987;line-height:130%;font-size:112%;">
+- one call → all document field's values as JS object.
+- checkbox groups / multiple selects become arrays automatically
+- duplicate names in different forms / sections → add a container argument
+- dynamic fields (name_34, name_65) → auto-group under name:{'34':'Alice','65':'Bob'}
+</div>
+**Parameters:**
+- `...args` {...string|string[]|InDom} (optional) - Field names (rest or array) or an InDom object as last arg to limit scope
+
+**Returns:**
+- {Object} map of field names to their current values  
+
+**Throws:**
+- `TypeError`: If a given field name is not a non-empty string 
+
+**Examples:**
+```js 
+// every input/textarea/select field in document
+let o = $v();
+console.log(o);
+//{"username":"Alice","message":"","color":"blue","size":["s","m"],"payment":null,
+//"features":["wifi","gps"]...}
+
+// every field inside first .input-examples
+o = $v($1('.input-examples'));
+console.log(o);
+//{"username":"Alice","message":"","size":["s","m"],"payment":null,"features":[]...}
+
+// only username + features (whole document)
+o = $v('username','features');
+console.log(o);
+//{"username":"Alice","features":["wifi","gps"]}
+
+// only username + features (inside first .input-examples)
+o = $v('username','features',$1('.input-examples'));	
+console.log(o);
+//{"username":"Alice","features":[]}
+// the same as $v(["username","features"],$1('.input-examples'));
+```
+```html
+<div>
+	<input type="text" name="name_34" value=""><input type="text" name="age_34" value="">
+</div>
+<div>
+	<input type="text" name="name_65" value=""><input type="text" name="age_65" value="">
+</div>
+```
+```js
+// pick normal + grouped fields
+o = $v('username','name_','age_');
+console.log(o);
+//{"username":"Alice","name":{"34":"Bob","65":"Carol"},"age":{"34":"28","65":"32"}}
+
+// harvest all (default: group underscores)
+o = $v();
+console.log(o);
+//{"username":"Alice","message":"",..."name":{"34":"Bob","65":"Carol"},
+//"age":{"34":"28","65":"32"}}
+
+// harvest all WITHOUT grouping
+o = $v([]);
+console.log(o);
+//{"username":"Alice","message":"",..."name_34":"Bob","age_34":"28",
+//"name_65":"Carol","age_65":"32"}
+```
 [↑TOC](#table-of-contents)
 
 ### `.on(type, fn?, opts?)`
