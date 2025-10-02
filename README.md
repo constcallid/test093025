@@ -38,15 +38,15 @@
 
 [Shortcuts](#shortcuts) | [getOne → **$1**](#indomgetoneselector-container) | [get → **$a**](#indomgetselector-container) | [getById → **$id**](#indomgetbyidid) | [new InDom → **$n**](#new-indomsource) | [onReady](#indomonreadyfn)
 
-[getValue](#getvaluecontainer) | [getValues → **$v**](#indomgetvaluesargs) | [setValue](#setvalue-value-container)
+[getValue](#getvaluecontainer) | [getValues → **$v**](#indomgetvaluesargs) | [setValue](#setvaluevalue-container)
 
-[on (+ onClick , onEnter etc.)](#on-type-fn-opts) | [onRemove](#onremove-fn) | [off](#off-type-fn)
+[on (onClick , onEnter etc.)](#ontype-fn-opts) | [onRemove](#onremovefn) | [off](#offtype-fn)
 
-[getElement / el](#getelement-el) | [remove](#remove) | [is](#is-selector) | [getParent](#getparent-selector) | [getSelfOrParent](#getparent-selector) | [getNext](#getnext-selector) | [getPrev](#getprev-selector) | [append](#append-children) | [prepend](#prepend-children) | [after](#after-siblings) | [before](#before-siblings) | [setHtml](#setdata-key-value) | [getHtml](#getdata-key)
+[getElement / el](#getelement--el) | [remove](#remove) | [is](#isselector) | [getParent](#getparentselector) | [getSelfOrParent](#getselforparentselector) | [getNext](#getnextselector) | [getPrev](#getprevselector) | [append](#appendchildren) | [prepend](#prependchildren) | [after](#aftersiblings) | [before](#beforesiblings) | [setHtml](#sethtmlcontent) | [getHtml](#gethtml)
 
-[setData](#setdata-key-value) | [getData](#getdata-key) | [hasData](#hasdata-key) | [removeData](#removedata-key) | [setAttr](#setattr-key-value) | [getAttr](#getattr-key) | [hasAttr](#hasattr-key) | [removeAttr](#removeattr-key)
+[setData](#setdatakey-value) | [getData](#getdatakey) | [hasData](#hasdatakey) | [removeData](#removedatakey) | [setAttr](#setattrkey-value) | [getAttr](#getattrkey) | [hasAttr](#hasattrkey) | [removeAttr](#removeattrkey)
 
-[getBox](#getbox) | [getOuterBox](#getouterbox) | [getRelativeBox](#getrelativebox) | [addClass](#addclass-names) | [hasClass](#hasclass-name) | [removeClass](#removeclass-names)  | [setStyle](#setstyle-property-map-value) | [getStyle](#getstyle-properties)
+[getBox](#getbox) | [getOuterBox](#getouterbox) | [getRelativeBox](#getrelativebox) | [addClass](#addclassnames) | [hasClass](#hasclassname) | [removeClass](#removeclassnames)  | [setStyle](#setstyleproperty--map-value) | [getStyle](#getstyleproperties)
 <hr>
 
 ### Additional Topics
@@ -1173,7 +1173,7 @@ Returns `null` if the key is not found in either place.
 - `Error`: If the underlying element has been removed  
 
 **Examples:**
-see [setData()](#setdata-key-value)
+see [setData()](#setdatakey-value)
 
 [↑TOC](#table-of-contents)
 
@@ -1192,7 +1192,7 @@ Returns `true` if the underlying element has a `data-*` attribute **or** in its 
 - `Error`: If the underlying element has been removed
 
 **Examples:**
-see [setData()](#setdata-key-value)
+see [setData()](#setdatakey-value)
 
 [↑TOC](#table-of-contents)
 
@@ -1211,7 +1211,7 @@ Removes the key from the `data-*` attribute **or** from internal memory map,  wh
 - `Error`: If the underlying element(s) has been removed  
 
 **Examples:**
-see [setData()](#setdata-key-value)
+see [setData()](#setdatakey-value)
 
 [↑TOC](#table-of-contents)
 
@@ -1263,7 +1263,7 @@ Gets the value of an attribute of the underlyuing element.
 - `Error`: If the underlying element has been removed 
 
 **Examples:**
-see [setAttr()](#setattr-key-value)
+see [setAttr()](#setattrkey-value)
 
 [↑TOC](#table-of-contents)
 
@@ -1282,7 +1282,7 @@ Checks if the underlying element has an attribute.
 - `Error`: If the underlying element has been removed 
 
 **Examples:**
-see [setAttr()](#setattr-key-value)
+see [setAttr()](#setattrkey-value)
 
 [↑TOC](#table-of-contents)
 
@@ -1301,7 +1301,7 @@ Removes an attribute from the underlying element(s).
 - `Error`: If the underlying element(s) has been removed 
 
 **Examples:**
-see [setAttr()](#setattr-key-value)
+see [setAttr()](#setattrkey-value)
 [↑TOC](#table-of-contents)
 
 [↑TOC](#table-of-contents)
@@ -1495,7 +1495,7 @@ sumResetClicked.onClick(() => {
 - `Error`: If the underlying element has been removed 
 
 **Examples:**
-see [addClass()](#addclass-names)
+see [addClass()](#addclassnames)
 
 [↑TOC](#table-of-contents)
 
@@ -1514,7 +1514,7 @@ Removes one or more CSS classes from the underlying element(s).
 - `Error`: If the underlying element(s) has been removed 
 
 **Examples:**
-see [addClass()](#addclass-names)
+see [addClass()](#addclassnames)
 
 [↑TOC](#table-of-contents)
 
@@ -1579,7 +1579,7 @@ console.log([styles.color, styles.fontSize]);
 - `Error`: If the underlying element has been removed 
 
 **Examples:**
-see [setStyle()](#setstyle-property-map-value)
+see [setStyle()](#setstyleproperty--map-value)
 
 [↑TOC](#table-of-contents)
 
