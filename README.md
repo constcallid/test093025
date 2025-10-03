@@ -50,7 +50,7 @@
 
 [getBox](#getbox) | [getOuterBox](#getouterbox) | [getRelativeBox](#getrelativebox) | [addClass](#addclassnames) | [hasClass](#hasclassname) | [removeClass](#removeclassnames)  | [setStyle](#setstyleproperty--map-value) | [getStyle](#getstyleproperties)
 
-[each](#eachfn) | [filter](#filterselector-fn) | [getFirst](#getfirst) | [getLast](#getlast)
+[each](#eachfn) | [filter](#filterselector--fn) | [getFirst](#getfirst) | [getLast](#getlast)
 <hr>
 
 ### Additional Topics
