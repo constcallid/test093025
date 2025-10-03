@@ -1609,6 +1609,8 @@ $a('.example>div').each(n => {
 // .each() is safe on empty collections: the callback simply never runs
 ```
 
+[↑TOC](#table-of-contents)
+
 ### `.filter(selector | fn)`
 **Available on:** `InDomArray`
 
