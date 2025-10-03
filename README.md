@@ -49,6 +49,8 @@
 [setData](#setdatakey-value) | [getData](#getdatakey) | [hasData](#hasdatakey) | [removeData](#removedatakey) | [setAttr](#setattrkey-value) | [getAttr](#getattrkey) | [hasAttr](#hasattrkey) | [removeAttr](#removeattrkey)
 
 [getBox](#getbox) | [getOuterBox](#getouterbox) | [getRelativeBox](#getrelativebox) | [addClass](#addclassnames) | [hasClass](#hasclassname) | [removeClass](#removeclassnames)  | [setStyle](#setstyleproperty--map-value) | [getStyle](#getstyleproperties)
+
+[each](#eachfn) | [filter](#filterselector-fn) | [getFirst](#getfirst) | [getLast](#getlast)
 <hr>
 
 ### Additional Topics
@@ -527,7 +529,7 @@ $a('input, textarea, select').setValue(null);
 
 **Parameters:**
 - `type` {string} - Event type, e.g. 'click', 'keydown'
-- `fn` {Function} (optional) - Event handler function; omit for mouse/click to trigger the event
+- `fn` {Function} (optional) -Event handler (n: InDom, e: Event) => void; omit for mouse/click to trigger the event
 - `opts` {AddEventListenerOptions} (optional) - Event options (once, passive, etc.)
 
 **Returns:**
@@ -594,7 +596,7 @@ $n(document).onClick((_, e) => $n(e.target).addClass('clicked'));
 Registers a callback function that runs after the object's internal state (listeners, data) has been cleaned up, and just before its element is removed from the DOM.
 
 **Parameters:**
-- `fn` {Function} - The callback function
+- `fn` {Function} - The callback function (n: InDom) => void;
 
 **Returns:**
 `{Function|Function[]}` - The internal handler(s) – pass to .off('onRemove', …) to unregister
@@ -1585,23 +1587,103 @@ see [setStyle()](#setstyleproperty--map-value)
 
 [↑TOC](#table-of-contents)
 
+### `.each(fn)`
+**Available on:** `InDomArray`
+
+Executes a function for each InDom objects of the InDomArray.
+
+**Parameters:**  
+- `fn` -  Function to execute
+
+**Returns:**  
+{InDomArray} - `this` for chaining
+
+**Examples:**
+```js
+$a('.example>div').each(n => {
+  if (!n.hasData('init')) {
+    // one-time initialisation
+    n.setData('init', 1);
+  }
+});
+// .each() is safe on empty collections: the callback simply never runs
+```
+
+### `.filter(selector | fn)`
+**Available on:** `InDomArray`
+
+Returns a new `InDomArray` collection containing only the InDom objects that their elements match a CSS selector or pass a predicate function.  
+The original collection is left untouched.
+
+**Parameters:**  
+- `selector` {string} - CSS selector to match.  
+- `fn` {function} - Function (element, index, array) => boolean; return `true` to keep the item.
+
+**Returns:**  
+{InDomArray} - New filtered collection (empty if nothing matches).
+
+**Example:**
+```js
+const exampleDivs = $a('.example>div');
+exampleDivs.onEnter(n => n.addClass('opened'));
+
+$1('body').append('<div id="test-filter">test filter</div>');
+$id('test-filter').onClick((...args) => {
+	// keep only .opened items
+	const openedDivs = exampleDivs.filter('.opened');
+
+	// keep items that contain at least one <a>
+	const divsWithLinks = openedDivs.filter(n => $a('a', n).length > 0);
+
+	// same as:
+	const divsWithLinks2 = new InDomArray();
+	opened.each(n => {
+		if ($a('a', n).length > 0) {
+			divsWithLinks2.push(n);
+		}
+	});
+
+});
+```
 
 [↑TOC](#table-of-contents)
 
+### `.getFirst()`
+**Available on:** `InDomArray`
+
+Returns the first InDom object of the InDomArray, or `null` when the array is empty.
+
+**Returns:**  
+{InDom|null}
+
+**Example:**
+```js
+const exampleDivs = $a('.example>div');
+if (exampleDivs.length > 0) {
+	if (exampleDivs.getFirst() === exampleDivs[0]) {
+		console.log('same object')
+	}
+}
+```
 
 [↑TOC](#table-of-contents)
 
+### `.getLast()`
+**Available on:** `InDomArray`
+
+Returns the last InDom object of the InDomArray, or `null` when the array is empty.
+
+**Returns:**  
+{InDom|null}
+
+**Example:**
+```js
+const exampleDivs = $a('.example>div');
+if (exampleDivs.length > 0) {
+	if (exampleDivs.getLast() === exampleDivs[exampleDivs.length - 1]) {
+		console.log('same object')
+	}
+}
+```
 
 [↑TOC](#table-of-contents)
-
-
-[↑TOC](#table-of-contents)
-
-
-[↑TOC](#table-of-contents)
-
-
-[↑TOC](#table-of-contents)
-
-
-
