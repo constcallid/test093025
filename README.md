@@ -50,7 +50,7 @@
 
 [getBox](#getbox) | [getOuterBox](#getouterbox) | [getRelativeBox](#getrelativebox) | [addClass](#addclassnames) | [hasClass](#hasclassname) | [removeClass](#removeclassnames)  | [setStyle](#setstyleproperty--map-value) | [getStyle](#getstyleproperties)
 
-[each](#eachfn) | [filter](#filterselector--fn) | [getFirst](#getfirst) | [getLast](#getlast)
+[InDomArray inherited methods](#indomarray-inherited-methods) | [each](#eachfn) | [filter](#filterselector--fn)
 <hr>
 
 ### Additional Topics
@@ -1568,7 +1568,7 @@ console.log([styles.color, styles.fontSize]);
 ### `.getStyle(...properties?)`
 **Available on:** `InDom`
 
- Gets computed CSS value(s) for the underlying element.
+ Gets computed CSS value(s) for the underlying element. 
 
 **Parameters:**  
 - `properties` {...string} [optional] - Zero or more CSS property names (dash-case).
@@ -1587,13 +1587,33 @@ see [setStyle()](#setstyleproperty--map-value)
 
 [↑TOC](#table-of-contents)
 
+### `InDomArray inherited methods`
+
+InDomArray extends Array, so every native Array method works. All methods that return a new array (concat, filter, flat, flatMap, map, slice, toReversed, toSorted, toSpliced) automatically return another InDomArray.
+
+**Examples:**
+```js
+// Suppose that for every #menu>div there is a matching .menu-icon (e.g. positioned fixed)
+const menuIcons = $a('.menu-icon');
+$a('#menu>div').each((n, i) => {
+  n.onEnter(() => menuIcons[i].addClass('on'));
+  n.onLeave(() => menuIcons[i].removeClass('on'));
+});
+
+const cat = $id('categories');
+// Sort direct child .example divs by number of direct span children, then re-append in new order
+cat.append($a('>div', cat).sort((a, b) => $a('>span', a).length - $a('>span', b).length));
+```
+
+[↑TOC](#table-of-contents)
+
 ### `.each(fn)`
 **Available on:** `InDomArray`
 
 Executes a function for each InDom objects of the InDomArray.
 
 **Parameters:**  
-- `fn` -  Function to execute
+- `fn` -  Function (element, index, array) => void; to execute
 
 **Returns:**  
 {InDomArray} - `this` for chaining
@@ -1639,53 +1659,13 @@ $id('test-filter').onClick((...args) => {
 
 	// same as:
 	const divsWithLinks2 = new InDomArray();
-	opened.each(n => {
+	openedDivs.each(n => {
 		if ($a('a', n).length > 0) {
 			divsWithLinks2.push(n);
 		}
 	});
 
 });
-```
-
-[↑TOC](#table-of-contents)
-
-### `.getFirst()`
-**Available on:** `InDomArray`
-
-Returns the first InDom object of the InDomArray, or `null` when the array is empty.
-
-**Returns:**  
-{InDom|null}
-
-**Example:**
-```js
-const exampleDivs = $a('.example>div');
-if (exampleDivs.length > 0) {
-	if (exampleDivs.getFirst() === exampleDivs[0]) {
-		console.log('same object')
-	}
-}
-```
-
-[↑TOC](#table-of-contents)
-
-### `.getLast()`
-**Available on:** `InDomArray`
-
-Returns the last InDom object of the InDomArray, or `null` when the array is empty.
-
-**Returns:**  
-{InDom|null}
-
-**Example:**
-```js
-const exampleDivs = $a('.example>div');
-if (exampleDivs.length > 0) {
-	if (exampleDivs.getLast() === exampleDivs[exampleDivs.length - 1]) {
-		console.log('same object')
-	}
-}
 ```
 
 [↑TOC](#table-of-contents)
