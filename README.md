@@ -1601,7 +1601,8 @@ $a('#menu>div').each((n, i) => {
 });
 
 const cat = $id('categories');
-// Sort direct child .example divs by number of direct span children, then re-append in new order
+// Sort direct child .example divs by number of direct span children,
+// then re-append in new order
 cat.append($a('>div', cat).sort((a, b) => $a('>span', a).length - $a('>span', b).length));
 ```
 
